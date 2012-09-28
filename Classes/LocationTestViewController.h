@@ -10,15 +10,7 @@
 #import <CoreLocation/CoreLocation.h>
 #import <MapKit/MapKit.h>
 
-@interface  LocationDelegate : NSObject <CLLocationManagerDelegate> 
-{
-	UILabel * resultsLabel;
-}
-
-- (id) initWithLabel:(UILabel*)label;
-
-@end
-
+@class LocationDelegate;
 
 @interface LocationTestViewController : UIViewController <CLLocationManagerDelegate> {
 	LocationDelegate    *m_gpsDelegate;
@@ -32,16 +24,13 @@
 -(IBAction) actionLog:(id)sender;
 -(IBAction) setDistanceFilter:(id)sender;
 
-@property (strong, nonatomic) IBOutlet UILabel      *m_gpsResultsLabel;
-@property (strong, nonatomic) IBOutlet UILabel      *m_significantResultsLabel;
+@property (strong, nonatomic) IBOutlet UILabel      *m_gpsLabel;
+@property (strong, nonatomic) IBOutlet UILabel      *m_significantLabel;
 @property (strong, nonatomic) IBOutlet UISwitch     *m_gpsSwitch;
 @property (strong, nonatomic) IBOutlet UISwitch     *m_significantSwitch;
-@property (strong, nonatomic) IBOutlet UISwitch     *m_mapSwitch;
 @property (strong, nonatomic) IBOutlet MKMapView    *m_map;
 @property (strong, nonatomic) IBOutlet UIButton     *m_distanceFilterButton;
 @property (strong, nonatomic) IBOutlet UITextField  *m_distanceFilterTextField;
-@property (strong, nonatomic) NSMutableArray        *m_gpsLocations;
-@property (strong, nonatomic) NSMutableArray        *m_sclsLocations;
 
 @end
 

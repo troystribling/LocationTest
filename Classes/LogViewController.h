@@ -15,6 +15,11 @@
 
 @property (strong, nonatomic) IBOutlet UITableView * m_tableView;
 
++ (NSString*)locationPath;
++ (void)log:(NSString*)msg;
++ (NSArray*)getLogArray;
++ (void)clearLog;
+
 -(IBAction) actionClose:(id)sender;
 -(IBAction) actionClear:(id)sender;
 

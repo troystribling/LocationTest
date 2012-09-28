@@ -12,19 +12,11 @@
 @class LocationTestViewController;
 
 @interface LocationTestAppDelegate : NSObject <UIApplicationDelegate, CLLocationManagerDelegate> {
-    UIWindow *window;
-    LocationTestViewController *viewController;
-	NSMutableArray * m_logArray;
 	CLLocationManager* m_locManager;
 }
 
-- (void) log:(NSString*)msg;
-- (NSArray*) getLogArray;
-- (void) clearLog;
-
-@property (nonatomic, strong) NSMutableArray * m_logArray;
-@property (nonatomic, strong) IBOutlet UIWindow *window;
-@property (nonatomic, strong) IBOutlet LocationTestViewController *viewController;
+@property (nonatomic, strong) IBOutlet UIWindow                     *window;
+@property (nonatomic, strong) IBOutlet LocationTestViewController   *viewController;
 
 @end
 

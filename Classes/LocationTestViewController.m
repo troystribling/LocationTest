@@ -9,78 +9,48 @@
 #import "LocationTestViewController.h"
 #import "LogViewController.h"
 #import "LocationTestAppDelegate.h"
-
-@implementation LocationDelegate
-
-- (id) initWithLabel:(UILabel*)label {
-	resultsLabel = label;
-	return [super init];
-}
-
-- (void)locationManager:(CLLocationManager *)manager didFailWithError:(NSError *)error {	
-	resultsLabel.text = [NSString stringWithFormat:@"(%@) %@ Failed to get location %@", ([UIApplication sharedApplication].applicationState == UIApplicationStateBackground) ? @"BG" : @"FG" , resultsLabel.tag == 0 ? @"GPS:" : @"SCLS", [error localizedDescription]];
-	LocationTestAppDelegate * appDelegate = (LocationTestAppDelegate *)[UIApplication sharedApplication].delegate;
-	[appDelegate log:resultsLabel.text];
-}
-
-- (void)locationManager:(CLLocationManager *)manager didUpdateToLocation:(CLLocation *)newLocation fromLocation:(CLLocation *)oldLocation {
-	NSDateFormatter * formatter = [[NSDateFormatter alloc] init];
-	[formatter setTimeStyle:NSDateFormatterMediumStyle];		
-	resultsLabel.text = [NSString stringWithFormat:@"(%@) %@ Location %.06f %.06f %@", ([UIApplication sharedApplication].applicationState == UIApplicationStateBackground) ? @"BG" : @"FG", resultsLabel.tag == 0 ? @"GPS:" : @"SCLS" , newLocation.coordinate.latitude, newLocation.coordinate.longitude, [formatter stringFromDate:newLocation.timestamp]];
-	LocationTestAppDelegate * appDelegate = (LocationTestAppDelegate *)[UIApplication sharedApplication].delegate;
-	[appDelegate log:resultsLabel.text];
-}
-
-@end
-
+#import "LocationDelegate.h"
 
 @implementation LocationTestViewController
 
-@synthesize m_gpsResultsLabel;
-@synthesize m_significantResultsLabel;
+@synthesize m_gpsLabel;
+@synthesize m_significantLabel;
 @synthesize m_significantSwitch;
 @synthesize m_gpsSwitch;
-@synthesize m_mapSwitch;
 @synthesize m_map;
 @synthesize m_distanceFilterButton, m_distanceFilterTextField;
-@synthesize m_gpsLocations, m_sclsLocations;
-
-- (void) log:(NSString*)msg andLabel:(UILabel*)label; {
-	LocationTestAppDelegate * appDelegate = (LocationTestAppDelegate *)[UIApplication sharedApplication].delegate;
-	[appDelegate log:msg];
-	if(label) {
-		label.text = msg;
-    }
-}
 
 - (void)viewDidLoad {
-	m_gpsDelegate = [[LocationDelegate alloc] initWithLabel:m_gpsResultsLabel];
-	m_significantDelegate = [[LocationDelegate alloc] initWithLabel:m_significantResultsLabel];
+	m_gpsDelegate = [[LocationDelegate alloc] initWithName:@"GPS"];
+    m_gpsDelegate.m_map = self.m_map;
+	m_significantDelegate = [[LocationDelegate alloc] initWithName:@"SCLS"];
+    m_significantDelegate.m_map = self.m_map;
     [super viewDidLoad];
 }
 
 - (void) significantOn {
-	[self log:@"SCLS TRACKING ON: " andLabel:m_significantResultsLabel];
+	[LogViewController log:@"SCLS TRACKING ON"];
 	m_significantManager = [[CLLocationManager alloc] init];
 	m_significantManager.delegate = m_significantDelegate;
 	[m_significantManager startMonitoringSignificantLocationChanges];
 }
 
 - (void) significantOff {
-	[self log:@"SCLS TRACKING OFF:" andLabel:m_significantResultsLabel];
+	[LogViewController log:@"SCLS TRACKING OFF"];
 	[m_significantManager stopMonitoringSignificantLocationChanges];
 }
 
 - (void) gpsOn {
-	[self log:@"GPS TRACKING ON:" andLabel:m_gpsResultsLabel];
+	[LogViewController log:@"GPS TRACKING ON"];
 	m_gpsManager = [[CLLocationManager alloc] init];
 	m_gpsManager.delegate = m_gpsDelegate;
+    m_gpsManager.distanceFilter = kCLDistanceFilterNone;
 	[m_gpsManager startUpdatingLocation];
-    self.m_distanceFilterTextField.text = [NSString stringWithFormat:@"%@", [NSNumber numberWithDouble:m_gpsManager.distanceFilter]];
+    self.m_distanceFilterTextField.text = [NSString stringWithFormat:@"%f", m_gpsManager.distanceFilter];
 }
 
 - (void) gpsOff {
-	[self log:@"GPS TRACKING OFF:" andLabel:m_gpsResultsLabel];
+	[LogViewController log:@"GPS TRACKING OFF"];
 	[m_gpsManager stopUpdatingLocation];
 }
 
@@ -110,7 +80,8 @@
     [numberFormatter setNumberStyle:NSNumberFormatterDecimalStyle];
     NSNumber *distanceFiler = [numberFormatter numberFromString:self.m_distanceFilterTextField.text];
     m_gpsManager.distanceFilter = [distanceFiler doubleValue];
-    self.m_distanceFilterTextField.text = [NSString stringWithFormat:@"%@", [NSNumber numberWithDouble:m_gpsManager.distanceFilter]];
+    self.m_distanceFilterTextField.text = [NSString stringWithFormat:@"%f", m_gpsManager.distanceFilter];
+    [self.m_distanceFilterTextField resignFirstResponder];
 }
 
 - (void)didReceiveMemoryWarning {
