@@ -23,6 +23,7 @@
 -(IBAction) actionSignificant:(id)sender;
 -(IBAction) actionLog:(id)sender;
 -(IBAction) setDistanceFilter:(id)sender;
+-(CLLocationDistance)getEnteredDistanceFilter;
 
 @property (strong, nonatomic) IBOutlet UILabel      *m_gpsLabel;
 @property (strong, nonatomic) IBOutlet UILabel      *m_significantLabel;

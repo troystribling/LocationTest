@@ -49,9 +49,9 @@
 	[LogViewController log:@"GPS TRACKING ON"];
 	m_gpsManager = [[CLLocationManager alloc] init];
 	m_gpsManager.delegate = m_gpsDelegate;
-    m_gpsManager.distanceFilter = 10.0f;
-	[m_gpsManager startUpdatingLocation];
+    m_gpsManager.distanceFilter = [self getEnteredDistanceFilter];
     self.m_distanceFilterTextField.text = [NSString stringWithFormat:@"%f", m_gpsManager.distanceFilter];
+	[m_gpsManager startUpdatingLocation];
 }
 
 - (void) gpsOff {
@@ -82,18 +82,18 @@
 	[self presentViewController:pNewController animated:YES completion:nil];
 }
 
--(IBAction) setDistanceFilter:(id)sender {
-    NSNumberFormatter *numberFormatter = [[NSNumberFormatter alloc] init];
-    [numberFormatter setNumberStyle:NSNumberFormatterDecimalStyle];
-    NSNumber *distanceFiler = [numberFormatter numberFromString:self.m_distanceFilterTextField.text];
-	[m_gpsManager stopUpdatingLocation];
-    m_gpsManager.distanceFilter = [distanceFiler doubleValue];
-    self.m_distanceFilterTextField.text = [NSString stringWithFormat:@"%f", m_gpsManager.distanceFilter];
+-(IBAction)setDistanceFilter:(id)sender {
+    if (m_gpsManager) {
+        [m_gpsManager stopUpdatingLocation];
+        m_gpsManager.distanceFilter = [self getEnteredDistanceFilter];
+        self.m_distanceFilterTextField.text = [NSString stringWithFormat:@"%f", m_gpsManager.distanceFilter];
+        [m_gpsManager startUpdatingLocation];
+        [m_map removeAnnotations:m_map.annotations];
+    } else {
+        self.m_distanceFilterTextField.text = [NSString stringWithFormat:@"%f", [self getEnteredDistanceFilter]];
+    }
     [self.m_distanceFilterTextField resignFirstResponder];
-    [m_gpsManager startUpdatingLocation];
-    [m_map removeAnnotations:m_map.annotations];
 }
-
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
@@ -117,6 +117,13 @@
     annotationView.pinColor = senderAnnotation.pinColor;
     result = annotationView;
     return result;
+}
+
+- (CLLocationDistance)getEnteredDistanceFilter {
+    NSNumberFormatter *numberFormatter = [[NSNumberFormatter alloc] init];
+    [numberFormatter setNumberStyle:NSNumberFormatterDecimalStyle];
+    NSNumber *distanceFiler = [numberFormatter numberFromString:self.m_distanceFilterTextField.text];
+    return [distanceFiler doubleValue];
 }
 
 @end
