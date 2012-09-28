@@ -12,29 +12,21 @@
 
 @implementation LocationDelegate
 
-- (id) initWithLabel:(UILabel*)label
-{
+- (id) initWithLabel:(UILabel*)label {
 	resultsLabel = label;
 	return [super init];
 }
 
-- (void)locationManager:(CLLocationManager *)manager didFailWithError:(NSError *)error
-{	
-	resultsLabel.text = [NSString stringWithFormat:@"(%@) %@ Failed to get location %@", ([UIApplication sharedApplication].applicationState == UIApplicationStateBackground) ? @"bg" : @"fg" , resultsLabel.tag == 0 ? @"gps:" : @"sig", [error localizedDescription]];
-
+- (void)locationManager:(CLLocationManager *)manager didFailWithError:(NSError *)error {	
+	resultsLabel.text = [NSString stringWithFormat:@"(%@) %@ Failed to get location %@", ([UIApplication sharedApplication].applicationState == UIApplicationStateBackground) ? @"BG" : @"FG" , resultsLabel.tag == 0 ? @"GPS:" : @"SCLS", [error localizedDescription]];
 	LocationTestAppDelegate * appDelegate = (LocationTestAppDelegate *)[UIApplication sharedApplication].delegate;
 	[appDelegate log:resultsLabel.text];
 }
 
-- (void)locationManager:(CLLocationManager *)manager
-	didUpdateToLocation:(CLLocation *)newLocation
-		   fromLocation:(CLLocation *)oldLocation
-{
-	NSDateFormatter * formatter = [[[NSDateFormatter alloc] init] autorelease];
-	[formatter setTimeStyle:NSDateFormatterMediumStyle];
-		
-	resultsLabel.text = [NSString stringWithFormat:@"(%@) %@ Location %.06f %.06f %@", ([UIApplication sharedApplication].applicationState == UIApplicationStateBackground) ? @"bg" : @"fg", resultsLabel.tag == 0 ? @"gps:" : @"sig" , newLocation.coordinate.latitude, newLocation.coordinate.longitude, [formatter stringFromDate:newLocation.timestamp]];
-	
+- (void)locationManager:(CLLocationManager *)manager didUpdateToLocation:(CLLocation *)newLocation fromLocation:(CLLocation *)oldLocation {
+	NSDateFormatter * formatter = [[NSDateFormatter alloc] init];
+	[formatter setTimeStyle:NSDateFormatterMediumStyle];		
+	resultsLabel.text = [NSString stringWithFormat:@"(%@) %@ Location %.06f %.06f %@", ([UIApplication sharedApplication].applicationState == UIApplicationStateBackground) ? @"BG" : @"FG", resultsLabel.tag == 0 ? @"GPS:" : @"SCLS" , newLocation.coordinate.latitude, newLocation.coordinate.longitude, [formatter stringFromDate:newLocation.timestamp]];
 	LocationTestAppDelegate * appDelegate = (LocationTestAppDelegate *)[UIApplication sharedApplication].delegate;
 	[appDelegate log:resultsLabel.text];
 }
@@ -50,110 +42,79 @@
 @synthesize m_gpsSwitch;
 @synthesize m_mapSwitch;
 @synthesize m_map;
+@synthesize m_distanceFilterButton, m_distanceFilterTextField;
+@synthesize m_gpsLocations, m_sclsLocations;
 
-- (void) log:(NSString*)msg andLabel:(UILabel*)label;
-{
+- (void) log:(NSString*)msg andLabel:(UILabel*)label; {
 	LocationTestAppDelegate * appDelegate = (LocationTestAppDelegate *)[UIApplication sharedApplication].delegate;
 	[appDelegate log:msg];
-	if(label)
+	if(label) {
 		label.text = msg;
+    }
 }
 
 - (void)viewDidLoad {
-		
 	m_gpsDelegate = [[LocationDelegate alloc] initWithLabel:m_gpsResultsLabel];
-	m_significantDelegate = [[LocationDelegate alloc] initWithLabel:m_significantResultsLabel];	
-		
+	m_significantDelegate = [[LocationDelegate alloc] initWithLabel:m_significantResultsLabel];
     [super viewDidLoad];
 }
 
-- (void) significantOn
-{
-	[self log:@"Sig tracking on..." andLabel:m_significantResultsLabel];
-	
-	[m_significantManager release];
+- (void) significantOn {
+	[self log:@"SCLS TRACKING ON: " andLabel:m_significantResultsLabel];
 	m_significantManager = [[CLLocationManager alloc] init];
 	m_significantManager.delegate = m_significantDelegate;
-
 	[m_significantManager startMonitoringSignificantLocationChanges];
 }
 
-- (void) significantOff
-{
-	[self log:@"Sig tracking off..." andLabel:m_significantResultsLabel];
+- (void) significantOff {
+	[self log:@"SCLS TRACKING OFF:" andLabel:m_significantResultsLabel];
 	[m_significantManager stopMonitoringSignificantLocationChanges];
 }
 
-- (void) gpsOn
-{
-	[self log:@"GPS tracking on..." andLabel:m_gpsResultsLabel];
-	
-	[m_gpsManager release];
+- (void) gpsOn {
+	[self log:@"GPS TRACKING ON:" andLabel:m_gpsResultsLabel];
 	m_gpsManager = [[CLLocationManager alloc] init];
 	m_gpsManager.delegate = m_gpsDelegate;
-
 	[m_gpsManager startUpdatingLocation];
+    self.m_distanceFilterTextField.text = [NSString stringWithFormat:@"%@", [NSNumber numberWithDouble:m_gpsManager.distanceFilter]];
 }
 
-- (void) gpsOff
-{
-	[self log:@"GPS tracking off..." andLabel:m_gpsResultsLabel];
+- (void) gpsOff {
+	[self log:@"GPS TRACKING OFF:" andLabel:m_gpsResultsLabel];
 	[m_gpsManager stopUpdatingLocation];
 }
 
--(IBAction) actionGps:(id)sender
-{
-	if (m_gpsSwitch.on)
+-(IBAction) actionGps:(id)sender {
+	if (m_gpsSwitch.on) {
 		[self gpsOn];
-	else
+	} else {
 		[self gpsOff];
+    }
 }
 
--(IBAction) actionSignificant:(id)sender
-{
-	if (m_significantSwitch.on)
+-(IBAction) actionSignificant:(id)sender {
+	if (m_significantSwitch.on) {
 		[self significantOn];
-	else
+	} else {
 		[self significantOff];
+    }
 }
 
--(IBAction) actionMap:(id)sender
-{
-	[self log:[NSString stringWithFormat:@"map showing location %@", m_mapSwitch.on ? @"on" : @"off"] andLabel:nil];
-	m_map.showsUserLocation = m_mapSwitch.on;
+-(IBAction) actionLog:(id)sender {
+	LogViewController* pNewController=[[LogViewController alloc] initWithNibName:@"LogViewController" bundle:nil];
+	[self presentViewController:pNewController animated:YES completion:nil];
 }
 
--(IBAction) actionLog:(id)sender
-{
-	LogViewController* pNewController=[[[LogViewController alloc] initWithNibName:@"LogViewController" bundle:nil] autorelease];
-	[self presentModalViewController:pNewController animated:YES];
+-(IBAction) setDistanceFilter:(id)sender {
+    NSNumberFormatter *numberFormatter = [[NSNumberFormatter alloc] init];
+    [numberFormatter setNumberStyle:NSNumberFormatterDecimalStyle];
+    NSNumber *distanceFiler = [numberFormatter numberFromString:self.m_distanceFilterTextField.text];
+    m_gpsManager.distanceFilter = [distanceFiler doubleValue];
+    self.m_distanceFilterTextField.text = [NSString stringWithFormat:@"%@", [NSNumber numberWithDouble:m_gpsManager.distanceFilter]];
 }
 
 - (void)didReceiveMemoryWarning {
-	// Releases the view if it doesn't have a superview.
     [super didReceiveMemoryWarning];
-	
-	// Release any cached data, images, etc that aren't in use.
-}
-
-- (void)viewDidUnload {
-	// Release any retained subviews of the main view.
-	// e.g. self.myOutlet = nil;
-}
-
-
-- (void)dealloc {
-	[m_mapSwitch release];
-	[m_gpsResultsLabel release];
-	[m_significantResultsLabel release];
-	[m_significantSwitch release];
-	[m_gpsSwitch release];
-	[m_map release];
-	[m_gpsManager release];
-	[m_significantManager release];
-	[m_gpsDelegate release];
-	[m_significantDelegate release];
-    [super dealloc];
 }
 
 @end

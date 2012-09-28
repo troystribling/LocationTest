@@ -22,9 +22,9 @@
 - (NSArray*) getLogArray;
 - (void) clearLog;
 
-@property (nonatomic, retain) NSMutableArray * m_logArray;
-@property (nonatomic, retain) IBOutlet UIWindow *window;
-@property (nonatomic, retain) IBOutlet LocationTestViewController *viewController;
+@property (nonatomic, strong) NSMutableArray * m_logArray;
+@property (nonatomic, strong) IBOutlet UIWindow *window;
+@property (nonatomic, strong) IBOutlet LocationTestViewController *viewController;
 
 @end
 

@@ -21,32 +21,27 @@
 
 
 @interface LocationTestViewController : UIViewController <CLLocationManagerDelegate> {
-	IBOutlet UILabel * m_gpsResultsLabel;
-	IBOutlet UILabel * m_significantResultsLabel;
-	IBOutlet UISwitch * m_gpsSwitch;
-	IBOutlet UISwitch * m_significantSwitch;
-	IBOutlet UISwitch * m_mapSwitch;
-	IBOutlet MKMapView * m_map;
-	
-	LocationDelegate * m_gpsDelegate;
-	LocationDelegate * m_significantDelegate;	
-	
-	// location objects
-	CLLocationManager* m_gpsManager;
-	CLLocationManager* m_significantManager;
+	LocationDelegate    *m_gpsDelegate;
+	LocationDelegate    *m_significantDelegate;
+	CLLocationManager   *m_gpsManager;
+	CLLocationManager   *m_significantManager;
 }
 
 -(IBAction) actionGps:(id)sender;
 -(IBAction) actionSignificant:(id)sender;
--(IBAction) actionMap:(id)sender;
 -(IBAction) actionLog:(id)sender;
+-(IBAction) setDistanceFilter:(id)sender;
 
-@property (retain, nonatomic) IBOutlet UILabel * m_gpsResultsLabel;
-@property (retain, nonatomic) IBOutlet UILabel * m_significantResultsLabel;
-@property (retain, nonatomic) IBOutlet UISwitch * m_gpsSwitch;
-@property (retain, nonatomic) IBOutlet UISwitch * m_significantSwitch;
-@property (retain, nonatomic) IBOutlet UISwitch * m_mapSwitch;
-@property (retain, nonatomic) IBOutlet MKMapView * m_map;
+@property (strong, nonatomic) IBOutlet UILabel      *m_gpsResultsLabel;
+@property (strong, nonatomic) IBOutlet UILabel      *m_significantResultsLabel;
+@property (strong, nonatomic) IBOutlet UISwitch     *m_gpsSwitch;
+@property (strong, nonatomic) IBOutlet UISwitch     *m_significantSwitch;
+@property (strong, nonatomic) IBOutlet UISwitch     *m_mapSwitch;
+@property (strong, nonatomic) IBOutlet MKMapView    *m_map;
+@property (strong, nonatomic) IBOutlet UIButton     *m_distanceFilterButton;
+@property (strong, nonatomic) IBOutlet UITextField  *m_distanceFilterTextField;
+@property (strong, nonatomic) NSMutableArray        *m_gpsLocations;
+@property (strong, nonatomic) NSMutableArray        *m_sclsLocations;
 
 @end
 

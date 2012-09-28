@@ -13,7 +13,7 @@
 	IBOutlet UITableView * m_tableView;
 }
 
-@property (retain, nonatomic) IBOutlet UITableView * m_tableView;
+@property (strong, nonatomic) IBOutlet UITableView * m_tableView;
 
 -(IBAction) actionClose:(id)sender;
 -(IBAction) actionClear:(id)sender;
