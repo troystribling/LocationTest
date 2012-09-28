@@ -10,6 +10,7 @@
 #import "LogViewController.h"
 #import "LocationTestAppDelegate.h"
 #import "LocationDelegate.h"
+#import "LocationAnnotation.h"
 
 @implementation LocationTestViewController
 
@@ -21,10 +22,12 @@
 @synthesize m_distanceFilterButton, m_distanceFilterTextField;
 
 - (void)viewDidLoad {
+    m_map.delegate = self;
 	m_gpsDelegate = [[LocationDelegate alloc] initWithName:@"GPS"];
-    m_gpsDelegate.m_map = self.m_map;
+    m_gpsDelegate.m_map = m_map;
 	m_significantDelegate = [[LocationDelegate alloc] initWithName:@"SCLS"];
-    m_significantDelegate.m_map = self.m_map;
+    m_significantDelegate.m_map = m_map;
+    m_significantDelegate.m_pinColor = MKPinAnnotationColorPurple;
     [super viewDidLoad];
 }
 
@@ -37,6 +40,8 @@
 
 - (void) significantOff {
 	[LogViewController log:@"SCLS TRACKING OFF"];
+    [m_map removeAnnotations:m_map.annotations];
+    [m_significantDelegate.m_locations removeAllObjects];
 	[m_significantManager stopMonitoringSignificantLocationChanges];
 }
 
@@ -44,13 +49,15 @@
 	[LogViewController log:@"GPS TRACKING ON"];
 	m_gpsManager = [[CLLocationManager alloc] init];
 	m_gpsManager.delegate = m_gpsDelegate;
-    m_gpsManager.distanceFilter = kCLDistanceFilterNone;
+    m_gpsManager.distanceFilter = 10.0f;
 	[m_gpsManager startUpdatingLocation];
     self.m_distanceFilterTextField.text = [NSString stringWithFormat:@"%f", m_gpsManager.distanceFilter];
 }
 
 - (void) gpsOff {
 	[LogViewController log:@"GPS TRACKING OFF"];
+    [m_map removeAnnotations:m_map.annotations];
+    [m_gpsDelegate.m_locations removeAllObjects];
 	[m_gpsManager stopUpdatingLocation];
 }
 
@@ -79,13 +86,37 @@
     NSNumberFormatter *numberFormatter = [[NSNumberFormatter alloc] init];
     [numberFormatter setNumberStyle:NSNumberFormatterDecimalStyle];
     NSNumber *distanceFiler = [numberFormatter numberFromString:self.m_distanceFilterTextField.text];
+	[m_gpsManager stopUpdatingLocation];
     m_gpsManager.distanceFilter = [distanceFiler doubleValue];
     self.m_distanceFilterTextField.text = [NSString stringWithFormat:@"%f", m_gpsManager.distanceFilter];
     [self.m_distanceFilterTextField resignFirstResponder];
+    [m_gpsManager startUpdatingLocation];
+    [m_map removeAnnotations:m_map.annotations];
 }
+
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
+}
+
+- (MKAnnotationView *)mapView:(MKMapView*)mapView viewForAnnotation:(id<MKAnnotation>)annotation {
+    MKAnnotationView *result = nil;
+    if ([annotation isKindOfClass:[LocationAnnotation class]] == NO) {
+        return result;
+    }
+    if ([mapView isEqual:self.m_map] == NO) {
+        return result;
+    }
+    LocationAnnotation *senderAnnotation = (LocationAnnotation*)annotation;
+    NSString *pinReusableIdentifier = [LocationAnnotation reusableIdentifierforPinColor:senderAnnotation.pinColor];
+    MKPinAnnotationView *annotationView = (MKPinAnnotationView *)[mapView dequeueReusableAnnotationViewWithIdentifier:pinReusableIdentifier];
+    if (annotationView == nil) {
+        annotationView = [[MKPinAnnotationView alloc] initWithAnnotation:senderAnnotation reuseIdentifier:pinReusableIdentifier];
+        [annotationView setCanShowCallout:YES];
+    }
+    annotationView.pinColor = senderAnnotation.pinColor;
+    result = annotationView;
+    return result;
 }
 
 @end

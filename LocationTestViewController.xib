@@ -78,11 +78,11 @@
 						<nil key="IBUIHighlightedColor"/>
 						<int key="IBUIBaselineAdjustment">1</int>
 						<float key="IBUIMinimumFontSize">10</float>
-						<object class="IBUIFontDescription" key="IBUIFontDescription" id="84693023">
+						<object class="IBUIFontDescription" key="IBUIFontDescription" id="684295742">
 							<int key="type">2</int>
 							<double key="pointSize">17</double>
 						</object>
-						<object class="NSFont" key="IBUIFont" id="167882191">
+						<object class="NSFont" key="IBUIFont" id="438839973">
 							<string key="NSName">Helvetica-Bold</string>
 							<double key="NSSize">17</double>
 							<int key="NSfFlags">16</int>
@@ -121,8 +121,8 @@
 						<nil key="IBUIHighlightedColor"/>
 						<int key="IBUIBaselineAdjustment">1</int>
 						<float key="IBUIMinimumFontSize">10</float>
-						<reference key="IBUIFontDescription" ref="84693023"/>
-						<reference key="IBUIFont" ref="167882191"/>
+						<reference key="IBUIFontDescription" ref="684295742"/>
+						<reference key="IBUIFont" ref="438839973"/>
 					</object>
 					<object class="IBMKMapView" id="841138476">
 						<reference key="NSNextResponder" ref="774585933"/>
@@ -141,7 +141,6 @@
 						<string key="NSFrame">{{20, 493}, {280, 37}}</string>
 						<reference key="NSSuperview" ref="774585933"/>
 						<reference key="NSWindow"/>
-						<reference key="NSNextKeyView"/>
 						<bool key="IBUIOpaque">NO</bool>
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 						<int key="IBUIContentHorizontalAlignment">0</int>
@@ -191,12 +190,14 @@
 							<bytes key="NSWhite">MAA</bytes>
 							<reference key="NSCustomColorSpace" ref="227759772"/>
 						</object>
+						<bool key="IBUIClearsOnBeginEditing">YES</bool>
 						<bool key="IBUIAdjustsFontSizeToFit">YES</bool>
 						<float key="IBUIMinimumFontSize">17</float>
 						<object class="IBUITextInputTraits" key="IBUITextInputTraits">
 							<int key="IBUIKeyboardType">4</int>
 							<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 						</object>
+						<int key="IBUIClearButtonMode">1</int>
 						<object class="IBUIFontDescription" key="IBUIFontDescription">
 							<int key="type">1</int>
 							<double key="pointSize">14</double>
@@ -234,7 +235,7 @@
 							<int key="NSfFlags">16</int>
 						</object>
 					</object>
-					<object class="IBUILabel" id="415228815">
+					<object class="IBUILabel" id="606290669">
 						<reference key="NSNextResponder" ref="774585933"/>
 						<int key="NSvFlags">292</int>
 						<string key="NSFrame">{{35, 5}, {131, 21}}</string>
@@ -257,15 +258,15 @@
 						</object>
 						<nil key="IBUIHighlightedColor"/>
 						<int key="IBUIBaselineAdjustment">0</int>
-						<reference key="IBUIFontDescription" ref="84693023"/>
-						<reference key="IBUIFont" ref="167882191"/>
+						<reference key="IBUIFontDescription" ref="684295742"/>
+						<reference key="IBUIFont" ref="438839973"/>
 						<bool key="IBUIAdjustsFontSizeToFit">NO</bool>
 					</object>
 				</object>
 				<string key="NSFrame">{{0, 20}, {320, 548}}</string>
 				<reference key="NSSuperview"/>
 				<reference key="NSWindow"/>
-				<reference key="NSNextKeyView" ref="415228815"/>
+				<reference key="NSNextKeyView" ref="606290669"/>
 				<reference key="IBUIBackgroundColor" ref="125076331"/>
 				<bool key="IBUIClearsContextBeforeDrawing">NO</bool>
 				<object class="IBUISimulatedStatusBarMetrics" key="IBUISimulatedStatusBarMetrics">
@@ -411,7 +412,7 @@
 							<reference ref="841138476"/>
 							<reference ref="442299493"/>
 							<reference ref="936405990"/>
-							<reference ref="415228815"/>
+							<reference ref="606290669"/>
 							<reference ref="473385065"/>
 							<reference ref="947053714"/>
 							<reference ref="724802644"/>
@@ -466,7 +467,7 @@
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">35</int>
-						<reference key="object" ref="415228815"/>
+						<reference key="object" ref="606290669"/>
 						<reference key="parent" ref="774585933"/>
 					</object>
 				</object>
@@ -582,11 +583,10 @@
 							<bool key="EncodedWithXMLCoder">YES</bool>
 							<string>m_distanceFilterButton</string>
 							<string>m_distanceFilterTextField</string>
-							<string>m_gpsResultsLabel</string>
+							<string>m_gpsLabel</string>
 							<string>m_gpsSwitch</string>
 							<string>m_map</string>
-							<string>m_mapSwitch</string>
-							<string>m_significantResultsLabel</string>
+							<string>m_significantLabel</string>
 							<string>m_significantSwitch</string>
 						</object>
 						<object class="NSArray" key="dict.values">
@@ -596,7 +596,6 @@
 							<string>UILabel</string>
 							<string>UISwitch</string>
 							<string>MKMapView</string>
-							<string>UISwitch</string>
 							<string>UILabel</string>
 							<string>UISwitch</string>
 						</object>
@@ -607,11 +606,10 @@
 							<bool key="EncodedWithXMLCoder">YES</bool>
 							<string>m_distanceFilterButton</string>
 							<string>m_distanceFilterTextField</string>
-							<string>m_gpsResultsLabel</string>
+							<string>m_gpsLabel</string>
 							<string>m_gpsSwitch</string>
 							<string>m_map</string>
-							<string>m_mapSwitch</string>
-							<string>m_significantResultsLabel</string>
+							<string>m_significantLabel</string>
 							<string>m_significantSwitch</string>
 						</object>
 						<object class="NSArray" key="dict.values">
@@ -625,7 +623,7 @@
 								<string key="candidateClassName">UITextField</string>
 							</object>
 							<object class="IBToOneOutletInfo">
-								<string key="name">m_gpsResultsLabel</string>
+								<string key="name">m_gpsLabel</string>
 								<string key="candidateClassName">UILabel</string>
 							</object>
 							<object class="IBToOneOutletInfo">
@@ -637,11 +635,7 @@
 								<string key="candidateClassName">MKMapView</string>
 							</object>
 							<object class="IBToOneOutletInfo">
-								<string key="name">m_mapSwitch</string>
-								<string key="candidateClassName">UISwitch</string>
-							</object>
-							<object class="IBToOneOutletInfo">
-								<string key="name">m_significantResultsLabel</string>
+								<string key="name">m_significantLabel</string>
 								<string key="candidateClassName">UILabel</string>
 							</object>
 							<object class="IBToOneOutletInfo">

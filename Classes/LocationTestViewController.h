@@ -12,7 +12,7 @@
 
 @class LocationDelegate;
 
-@interface LocationTestViewController : UIViewController <CLLocationManagerDelegate> {
+@interface LocationTestViewController : UIViewController <CLLocationManagerDelegate, MKMapViewDelegate> {
 	LocationDelegate    *m_gpsDelegate;
 	LocationDelegate    *m_significantDelegate;
 	CLLocationManager   *m_gpsManager;

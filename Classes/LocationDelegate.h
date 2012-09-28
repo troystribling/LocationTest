@@ -11,10 +11,11 @@
 
 @interface  LocationDelegate : NSObject <CLLocationManagerDelegate>  
 
-@property (nonatomic, strong) NSString              *m_serviceName;
-@property (strong, nonatomic) NSMutableArray        *m_locations;
-@property (weak, nonatomic)   MKMapView             *m_map;
-@property (nonatomic, strong) UILabel               *m_statusLabel;
+@property (nonatomic, strong) NSString                          *m_serviceName;
+@property (strong, nonatomic) NSMutableArray                    *m_locations;
+@property (weak, nonatomic)   MKMapView                         *m_map;
+@property (nonatomic, strong) UILabel                           *m_statusLabel;
+@property (nonatomic, unsafe_unretained) MKPinAnnotationColor   m_pinColor;
 
 - (id)initWithName:(NSString*)serviceName;
 

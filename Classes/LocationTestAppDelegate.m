@@ -9,11 +9,11 @@
 #import "LocationTestAppDelegate.h"
 #import "LocationTestViewController.h"
 #import "LogViewController.h"
+#import "LocationDelegate.h"
 
 @implementation LocationTestAppDelegate
 
-@synthesize window;
-@synthesize viewController;
+@synthesize window, viewController, m_locManager, m_locationDelegate;
 
 #pragma mark -
 #pragma mark Application lifecycle
@@ -22,7 +22,10 @@
     id locationValue = [launchOptions objectForKey:UIApplicationLaunchOptionsLocationKey];
 	if (locationValue) {
 		[LogViewController log:@"didFinishLaunchingWithOptions UIApplicationLaunchOptionsLocationKey"];
-        [viewController actionSignificant:nil];
+        m_locManager = [[CLLocationManager alloc] init];
+        m_locationDelegate = [[LocationDelegate alloc] initWithName:@"SCLS RELAUNCH"];
+        m_locManager.delegate = m_locationDelegate;
+        [m_locManager startMonitoringSignificantLocationChanges];
 	} else {
         [LogViewController log:@"didFinishLaunching"];
         self.window.rootViewController = self.viewController;
@@ -51,15 +54,15 @@
 	[LogViewController log:@"applicationDidBecomeActive"];
     NSUserDefaults * userDefaults = [NSUserDefaults standardUserDefaults];
     viewController.m_significantSwitch.on = [userDefaults boolForKey:@"significant"];
-    viewController.m_distanceFilterTextField.text = [userDefaults objectForKey:@"distanceFilter"];
+    NSString* distanceFilter = [userDefaults objectForKey:@"distanceFilter"];
+    if (distanceFilter) {
+        viewController.m_distanceFilterTextField.text = distanceFilter;
+    }
 }
 
 - (void)applicationWillTerminate:(UIApplication *)application {
 	[LogViewController log:@"applicationWillTerminate"];
 }
-
-#pragma mark -
-#pragma mark Memory management
 
 - (void)applicationDidReceiveMemoryWarning:(UIApplication *)application {
 }

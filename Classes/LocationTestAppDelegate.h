@@ -10,13 +10,14 @@
 #import <CoreLocation/CoreLocation.h>
 
 @class LocationTestViewController;
+@class LocationDelegate;
 
-@interface LocationTestAppDelegate : NSObject <UIApplicationDelegate, CLLocationManagerDelegate> {
-	CLLocationManager* m_locManager;
-}
+@interface LocationTestAppDelegate : NSObject <UIApplicationDelegate, CLLocationManagerDelegate>
 
 @property (nonatomic, strong) IBOutlet UIWindow                     *window;
 @property (nonatomic, strong) IBOutlet LocationTestViewController   *viewController;
+@property (nonatomic, strong) CLLocationManager                     *m_locManager;
+@property (nonatomic, strong) LocationDelegate                      *m_locationDelegate;
 
 @end
 
