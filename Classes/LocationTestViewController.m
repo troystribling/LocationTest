@@ -25,6 +25,7 @@
     m_map.delegate = self;
 	m_gpsDelegate = [[LocationDelegate alloc] initWithName:@"GPS"];
     m_gpsDelegate.m_map = m_map;
+    m_gpsDelegate.m_pinColor = MKPinAnnotationColorGreen;
 	m_significantDelegate = [[LocationDelegate alloc] initWithName:@"SCLS"];
     m_significantDelegate.m_map = m_map;
     m_significantDelegate.m_pinColor = MKPinAnnotationColorPurple;
