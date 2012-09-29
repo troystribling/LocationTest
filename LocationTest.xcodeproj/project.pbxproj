@@ -12,6 +12,7 @@
 		05F2473F161608D800FC03B7 /* LocationDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 05F2473E161608D800FC03B7 /* LocationDelegate.m */; };
 		05F247441616962700FC03B7 /* icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 05F247431616962700FC03B7 /* icon.png */; };
 		05F247461616965900FC03B7 /* icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 05F247451616965900FC03B7 /* icon@2x.png */; };
+		05F2474816169A9A00FC03B7 /* default.png in Resources */ = {isa = PBXBuildFile; fileRef = 05F2474716169A9A00FC03B7 /* default.png */; };
 		1D3623260D0F684500981E51 /* LocationTestAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D3623250D0F684500981E51 /* LocationTestAppDelegate.m */; };
 		1D60589B0D05DD56006BFB54 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 29B97316FDCFA39411CA2CEA /* main.m */; };
 		1D60589F0D05DD5A006BFB54 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1D30AB110D05D00D00671497 /* Foundation.framework */; };
@@ -34,6 +35,7 @@
 		05F2473E161608D800FC03B7 /* LocationDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LocationDelegate.m; sourceTree = "<group>"; };
 		05F247431616962700FC03B7 /* icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon.png; sourceTree = "<group>"; };
 		05F247451616965900FC03B7 /* icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon@2x.png"; sourceTree = "<group>"; };
+		05F2474716169A9A00FC03B7 /* default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = default.png; path = ../../../../../Volumes/Pictures/Apps/EventChain/Icons/default.png; sourceTree = "<group>"; };
 		1D30AB110D05D00D00671497 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		1D3623240D0F684500981E51 /* LocationTestAppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LocationTestAppDelegate.h; sourceTree = "<group>"; };
 		1D3623250D0F684500981E51 /* LocationTestAppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LocationTestAppDelegate.m; sourceTree = "<group>"; };
@@ -99,6 +101,7 @@
 			isa = PBXGroup;
 			children = (
 				05F247451616965900FC03B7 /* icon@2x.png */,
+				05F2474716169A9A00FC03B7 /* default.png */,
 				05F247431616962700FC03B7 /* icon.png */,
 				05D4BFA216142DDA00CC354A /* default-568h@2x.png */,
 				080E96DDFE201D6D7F000001 /* Classes */,
@@ -200,6 +203,7 @@
 				05D4BFA316142DDA00CC354A /* default-568h@2x.png in Resources */,
 				05F247441616962700FC03B7 /* icon.png in Resources */,
 				05F247461616965900FC03B7 /* icon@2x.png in Resources */,
+				05F2474816169A9A00FC03B7 /* default.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
