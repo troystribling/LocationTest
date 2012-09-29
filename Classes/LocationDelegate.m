@@ -37,14 +37,14 @@
     }
     [m_locations addObject:location];
     
-    NSString* logMessage = [NSString stringWithFormat:@"(%@) %@ Location: %.06f %.06f %@",  [self applicationState], m_serviceName,
-                            location.coordinate.latitude, location.coordinate.longitude, [formatter stringFromDate:location.timestamp]];
+    NSString* logMessage = [NSString stringWithFormat:@"(%@) %@ Location: %.06f %.06f",  [self applicationState], m_serviceName,
+                            location.coordinate.latitude, location.coordinate.longitude];
     [LogViewController log:logMessage];
-    logMessage = [NSString stringWithFormat:@"%@ Travel Distance: %@ m, Speed: %f m/s", m_serviceName, distance, location.speed];
+    logMessage = [NSString stringWithFormat:@"%@ Travel Distance: %d m, Speed: %.03f m/s", m_serviceName, [distance integerValue], location.speed];
     [LogViewController log:logMessage];
     if (m_map) {
         NSString *annotationTitle = [NSString stringWithFormat:@"(%@) %d %@", [self applicationState], [m_locations count], m_serviceName];
-        NSString *annotationSubtitle = [NSString stringWithFormat:@"Distance: %d m, Speed: %f m/s", [distance integerValue], location.speed];
+        NSString *annotationSubtitle = [NSString stringWithFormat:@"Distance: %d m, Speed: %.03f m/s", [distance integerValue], location.speed];
         LocationAnnotation *annotation = [[LocationAnnotation alloc] initWithCoordinates:location.coordinate
                                                                                    title:annotationTitle
                                                                                 subTitle:annotationSubtitle];
