@@ -39,8 +39,6 @@
 
 - (void)locationManager:(CLLocationManager *)manager didUpdateToLocation:(CLLocation *)location fromLocation:(CLLocation *)oldLocation {
     m_statusLabel.textColor = [UIColor whiteColor];
-	NSDateFormatter * formatter = [[NSDateFormatter alloc] init];
-	[formatter setTimeStyle:NSDateFormatterMediumStyle];
 
     NSNumber *distance = [NSNumber numberWithInt:0];
     if ([m_locations count] > 0) {
@@ -54,7 +52,9 @@
     logMessage = [NSString stringWithFormat:@"%@ Distance: %d m, Speed: %.1f m/s, Alt: %.0f m", m_serviceName, [distance integerValue], location.speed, location.altitude];
     [LogViewController log:logMessage];
     if (m_map) {
-        NSString *annotationTitle = [NSString stringWithFormat:@"(%@) %d %@", [self applicationState], [m_locations count], m_serviceName];
+        NSDateFormatter * dateFormatter = [[NSDateFormatter alloc] init];
+        [dateFormatter setTimeStyle:NSDateFormatterMediumStyle];
+        NSString *annotationTitle = [NSString stringWithFormat:@"(%d:%@:%@) %@", [m_locations count], [self applicationState], m_serviceName, [dateFormatter stringFromDate:[NSDate date]]];
         NSString *annotationSubtitle = [NSString stringWithFormat:@"Distance: %d m, Speed: %.1f m/s\n Alt: %.0f m", [distance integerValue], location.speed, location.altitude];
         LocationAnnotation *annotation = [[LocationAnnotation alloc] initWithCoordinates:location.coordinate
                                                                                    title:annotationTitle
