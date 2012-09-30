@@ -58,7 +58,7 @@
 					<object class="IBUILabel" id="724802644">
 						<reference key="NSNextResponder" ref="774585933"/>
 						<int key="NSvFlags">292</int>
-						<string key="NSFrame">{{116, 75}, {44, 21}}</string>
+						<string key="NSFrame">{{107, 75}, {44, 21}}</string>
 						<reference key="NSSuperview" ref="774585933"/>
 						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="126848018"/>
@@ -103,10 +103,10 @@
 					<object class="IBUILabel" id="367618595">
 						<reference key="NSNextResponder" ref="774585933"/>
 						<int key="NSvFlags">292</int>
-						<string key="NSFrame">{{116, 110}, {53, 21}}</string>
+						<string key="NSFrame">{{107, 110}, {53, 21}}</string>
 						<reference key="NSSuperview" ref="774585933"/>
 						<reference key="NSWindow"/>
-						<reference key="NSNextKeyView" ref="841138476"/>
+						<reference key="NSNextKeyView" ref="167349161"/>
 						<bool key="IBUIOpaque">NO</bool>
 						<bool key="IBUIClipsSubviews">YES</bool>
 						<int key="IBUIContentMode">7</int>
@@ -127,7 +127,7 @@
 					<object class="IBMKMapView" id="841138476">
 						<reference key="NSNextResponder" ref="774585933"/>
 						<int key="NSvFlags">268</int>
-						<string key="NSFrame">{{20, 142}, {280, 343}}</string>
+						<string key="NSFrame">{{20, 143}, {280, 343}}</string>
 						<reference key="NSSuperview" ref="774585933"/>
 						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="442299493"/>
@@ -159,22 +159,18 @@
 							<int key="NSColorSpace">3</int>
 							<bytes key="NSWhite">MCAwAA</bytes>
 						</object>
-						<object class="IBUIFontDescription" key="IBUIFontDescription">
+						<object class="IBUIFontDescription" key="IBUIFontDescription" id="691717239">
 							<string key="name">Helvetica-Bold</string>
 							<string key="family">Helvetica</string>
 							<int key="traits">2</int>
-							<double key="pointSize">15</double>
+							<double key="pointSize">17</double>
 						</object>
-						<object class="NSFont" key="IBUIFont">
-							<string key="NSName">Helvetica-Bold</string>
-							<double key="NSSize">15</double>
-							<int key="NSfFlags">16</int>
-						</object>
+						<reference key="IBUIFont" ref="629379468"/>
 					</object>
 					<object class="IBUITextField" id="936405990">
 						<reference key="NSNextResponder" ref="774585933"/>
 						<int key="NSvFlags">292</int>
-						<string key="NSFrame">{{20, 34}, {159, 30}}</string>
+						<string key="NSFrame">{{20, 34}, {131, 30}}</string>
 						<reference key="NSSuperview" ref="774585933"/>
 						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="473385065"/>
@@ -200,18 +196,18 @@
 						<int key="IBUIClearButtonMode">1</int>
 						<object class="IBUIFontDescription" key="IBUIFontDescription">
 							<int key="type">1</int>
-							<double key="pointSize">14</double>
+							<double key="pointSize">17</double>
 						</object>
 						<object class="NSFont" key="IBUIFont">
 							<string key="NSName">Helvetica</string>
-							<double key="NSSize">14</double>
+							<double key="NSSize">17</double>
 							<int key="NSfFlags">16</int>
 						</object>
 					</object>
 					<object class="IBUIButton" id="473385065">
 						<reference key="NSNextResponder" ref="774585933"/>
 						<int key="NSvFlags">292</int>
-						<string key="NSFrame">{{224, 34}, {76, 31}}</string>
+						<string key="NSFrame">{{162, 34}, {138, 31}}</string>
 						<reference key="NSSuperview" ref="774585933"/>
 						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="947053714"/>
@@ -221,19 +217,17 @@
 						<int key="IBUIContentHorizontalAlignment">0</int>
 						<int key="IBUIContentVerticalAlignment">0</int>
 						<int key="IBUIButtonType">1</int>
-						<string key="IBUINormalTitle">Set</string>
+						<string key="IBUINormalTitle">Set Filter</string>
 						<reference key="IBUIHighlightedTitleColor" ref="492239607"/>
+						<object class="NSColor" key="IBUISelectedTitleColor">
+							<int key="NSColorSpace">1</int>
+							<bytes key="NSRGB">MCAwIDAAA</bytes>
+							<string key="IBUIColorCocoaTouchKeyPath">darkTextColor</string>
+						</object>
 						<reference key="IBUINormalTitleColor" ref="125076331"/>
 						<reference key="IBUINormalTitleShadowColor" ref="836136040"/>
-						<object class="IBUIFontDescription" key="IBUIFontDescription">
-							<int key="type">2</int>
-							<int key="size">2</int>
-						</object>
-						<object class="NSFont" key="IBUIFont">
-							<string key="NSName">Helvetica-Bold</string>
-							<double key="NSSize">18</double>
-							<int key="NSfFlags">16</int>
-						</object>
+						<reference key="IBUIFontDescription" ref="500614594"/>
+						<reference key="IBUIFont" ref="629379468"/>
 					</object>
 					<object class="IBUILabel" id="521976345">
 						<reference key="NSNextResponder" ref="774585933"/>
@@ -261,6 +255,34 @@
 						<reference key="IBUIFontDescription" ref="500614594"/>
 						<reference key="IBUIFont" ref="629379468"/>
 						<bool key="IBUIAdjustsFontSizeToFit">NO</bool>
+					</object>
+					<object class="IBUIButton" id="167349161">
+						<reference key="NSNextResponder" ref="774585933"/>
+						<int key="NSvFlags">292</int>
+						<string key="NSFrame">{{162, 72}, {138, 63}}</string>
+						<reference key="NSSuperview" ref="774585933"/>
+						<reference key="NSWindow"/>
+						<reference key="NSNextKeyView" ref="841138476"/>
+						<string key="NSReuseIdentifierKey">_NS:9</string>
+						<bool key="IBUIOpaque">NO</bool>
+						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
+						<bool key="IBUIEnabled">NO</bool>
+						<int key="IBUIContentHorizontalAlignment">0</int>
+						<int key="IBUIContentVerticalAlignment">0</int>
+						<int key="IBUIButtonType">1</int>
+						<string key="IBUINormalTitle">Send Location</string>
+						<object class="NSColor" key="IBUISelectedTitleColor" id="792823922">
+							<int key="NSColorSpace">1</int>
+							<bytes key="NSRGB">MCAwIDAAA</bytes>
+						</object>
+						<reference key="IBUINormalTitleColor" ref="792823922"/>
+						<reference key="IBUISelectedTitleShadowColor" ref="836136040"/>
+						<object class="NSColor" key="IBUINormalTitleShadowColor">
+							<int key="NSColorSpace">3</int>
+							<bytes key="NSWhite">MC41AA</bytes>
+						</object>
+						<reference key="IBUIFontDescription" ref="691717239"/>
+						<reference key="IBUIFont" ref="629379468"/>
 					</object>
 				</object>
 				<string key="NSFrame">{{0, 20}, {320, 548}}</string>
@@ -346,6 +368,14 @@
 					<int key="connectionID">32</int>
 				</object>
 				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">m_sendLocationButton</string>
+						<reference key="source" ref="372490531"/>
+						<reference key="destination" ref="167349161"/>
+					</object>
+					<int key="connectionID">38</int>
+				</object>
+				<object class="IBConnectionRecord">
 					<object class="IBCocoaTouchEventConnection" key="connection">
 						<string key="label">actionGps:</string>
 						<reference key="source" ref="947053714"/>
@@ -380,6 +410,15 @@
 						<int key="IBEventType">7</int>
 					</object>
 					<int key="connectionID">33</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchEventConnection" key="connection">
+						<string key="label">sendLocation:</string>
+						<reference key="source" ref="167349161"/>
+						<reference key="destination" ref="372490531"/>
+						<int key="IBEventType">7</int>
+					</object>
+					<int key="connectionID">37</int>
 				</object>
 			</object>
 			<object class="IBMutableOrderedSet" key="objectRecords">
@@ -418,6 +457,7 @@
 							<reference ref="724802644"/>
 							<reference ref="126848018"/>
 							<reference ref="367618595"/>
+							<reference ref="167349161"/>
 						</object>
 						<reference key="parent" ref="0"/>
 					</object>
@@ -470,6 +510,11 @@
 						<reference key="object" ref="521976345"/>
 						<reference key="parent" ref="774585933"/>
 					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">36</int>
+						<reference key="object" ref="167349161"/>
+						<reference key="parent" ref="774585933"/>
+					</object>
 				</object>
 			</object>
 			<object class="NSMutableDictionary" key="flattenedProperties">
@@ -488,6 +533,8 @@
 					<string>30.IBPluginDependency</string>
 					<string>30.IBUIButtonInspectorSelectedStateConfigurationMetadataKey</string>
 					<string>35.IBPluginDependency</string>
+					<string>36.IBPluginDependency</string>
+					<string>36.IBUIButtonInspectorSelectedStateConfigurationMetadataKey</string>
 					<string>6.IBPluginDependency</string>
 					<string>8.IBPluginDependency</string>
 					<string>9.IBPluginDependency</string>
@@ -507,6 +554,8 @@
 					<real value="2"/>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
+					<real value="2"/>
+					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 				</object>
@@ -523,7 +572,7 @@
 				<reference key="dict.values" ref="0"/>
 			</object>
 			<nil key="sourceID"/>
-			<int key="maxID">35</int>
+			<int key="maxID">38</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<object class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -538,10 +587,12 @@
 							<string>actionGps:</string>
 							<string>actionLog:</string>
 							<string>actionSignificant:</string>
+							<string>sendLocation:</string>
 							<string>setDistanceFilter:</string>
 						</object>
 						<object class="NSArray" key="dict.values">
 							<bool key="EncodedWithXMLCoder">YES</bool>
+							<string>id</string>
 							<string>id</string>
 							<string>id</string>
 							<string>id</string>
@@ -555,6 +606,7 @@
 							<string>actionGps:</string>
 							<string>actionLog:</string>
 							<string>actionSignificant:</string>
+							<string>sendLocation:</string>
 							<string>setDistanceFilter:</string>
 						</object>
 						<object class="NSArray" key="dict.values">
@@ -572,6 +624,10 @@
 								<string key="candidateClassName">id</string>
 							</object>
 							<object class="IBActionInfo">
+								<string key="name">sendLocation:</string>
+								<string key="candidateClassName">id</string>
+							</object>
+							<object class="IBActionInfo">
 								<string key="name">setDistanceFilter:</string>
 								<string key="candidateClassName">id</string>
 							</object>
@@ -586,6 +642,7 @@
 							<string>m_gpsLabel</string>
 							<string>m_gpsSwitch</string>
 							<string>m_map</string>
+							<string>m_sendLocationButton</string>
 							<string>m_significantLabel</string>
 							<string>m_significantSwitch</string>
 						</object>
@@ -596,6 +653,7 @@
 							<string>UILabel</string>
 							<string>UISwitch</string>
 							<string>MKMapView</string>
+							<string>UIButton</string>
 							<string>UILabel</string>
 							<string>UISwitch</string>
 						</object>
@@ -609,6 +667,7 @@
 							<string>m_gpsLabel</string>
 							<string>m_gpsSwitch</string>
 							<string>m_map</string>
+							<string>m_sendLocationButton</string>
 							<string>m_significantLabel</string>
 							<string>m_significantSwitch</string>
 						</object>
@@ -633,6 +692,10 @@
 							<object class="IBToOneOutletInfo">
 								<string key="name">m_map</string>
 								<string key="candidateClassName">MKMapView</string>
+							</object>
+							<object class="IBToOneOutletInfo">
+								<string key="name">m_sendLocationButton</string>
+								<string key="candidateClassName">UIButton</string>
 							</object>
 							<object class="IBToOneOutletInfo">
 								<string key="name">m_significantLabel</string>

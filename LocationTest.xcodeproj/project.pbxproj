@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0552BBEC1617D33E00556B9D /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0552BBEB1617D33E00556B9D /* MessageUI.framework */; };
 		05D4BFA316142DDA00CC354A /* default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 05D4BFA216142DDA00CC354A /* default-568h@2x.png */; };
 		05F2473016157B1600FC03B7 /* LocationAnnotation.m in Sources */ = {isa = PBXBuildFile; fileRef = 05F2472F16157B1600FC03B7 /* LocationAnnotation.m */; };
 		05F2473F161608D800FC03B7 /* LocationDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 05F2473E161608D800FC03B7 /* LocationDelegate.m */; };
@@ -28,6 +29,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		0552BBEB1617D33E00556B9D /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
 		05D4BFA216142DDA00CC354A /* default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "default-568h@2x.png"; sourceTree = "<group>"; };
 		05F2472F16157B1600FC03B7 /* LocationAnnotation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LocationAnnotation.m; sourceTree = "<group>"; };
 		05F2473116157D0200FC03B7 /* LocationAnnotation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LocationAnnotation.h; sourceTree = "<group>"; };
@@ -61,6 +63,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0552BBEC1617D33E00556B9D /* MessageUI.framework in Frameworks */,
 				1D60589F0D05DD5A006BFB54 /* Foundation.framework in Frameworks */,
 				1DF5F4E00D08C38300B7A737 /* UIKit.framework in Frameworks */,
 				288765A50DF7441C002DB57D /* CoreGraphics.framework in Frameworks */,
@@ -136,6 +139,7 @@
 		29B97323FDCFA39411CA2CEA /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				0552BBEB1617D33E00556B9D /* MessageUI.framework */,
 				1DF5F4DF0D08C38300B7A737 /* UIKit.framework */,
 				1D30AB110D05D00D00671497 /* Foundation.framework */,
 				288765A40DF7441C002DB57D /* CoreGraphics.framework */,

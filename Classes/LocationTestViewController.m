@@ -19,7 +19,7 @@
 @synthesize m_significantSwitch;
 @synthesize m_gpsSwitch;
 @synthesize m_map;
-@synthesize m_distanceFilterButton, m_distanceFilterTextField;
+@synthesize m_distanceFilterButton, m_distanceFilterTextField, m_sendLocationButton;
 
 - (void)viewDidLoad {
     m_map.delegate = self;
@@ -32,7 +32,8 @@
     [super viewDidLoad];
 }
 
-- (void) significantOn {
+- (void)significantOn {
+    m_sendLocationButton.enabled = YES;
 	[LogViewController log:@"SCLS TRACKING ON"];
     [m_significantDelegate.m_locations removeAllObjects];
     [m_map removeAnnotations:m_map.annotations];
@@ -41,12 +42,16 @@
 	[m_significantManager startMonitoringSignificantLocationChanges];
 }
 
-- (void) significantOff {
+- (void)significantOff {
+    if (!m_gpsSwitch.on) {
+        m_sendLocationButton.enabled = NO;
+    }
 	[LogViewController log:@"SCLS TRACKING OFF"];
 	[m_significantManager stopMonitoringSignificantLocationChanges];
 }
 
-- (void) gpsOn {
+- (void)gpsOn {
+    m_sendLocationButton.enabled = YES;
 	[LogViewController log:@"GPS TRACKING ON"];
     [m_map removeAnnotations:m_map.annotations];
     [m_gpsDelegate.m_locations removeAllObjects];
@@ -57,12 +62,15 @@
 	[m_gpsManager startUpdatingLocation];
 }
 
-- (void) gpsOff {
+- (void)gpsOff {
+    if (!m_significantSwitch.on) {
+        m_sendLocationButton.enabled = NO;
+    }
 	[LogViewController log:@"GPS TRACKING OFF"];
 	[m_gpsManager stopUpdatingLocation];
 }
 
--(IBAction) actionGps:(id)sender {
+-(IBAction)actionGps:(id)sender {
 	if (m_gpsSwitch.on) {
 		[self gpsOn];
 	} else {
@@ -70,7 +78,7 @@
     }
 }
 
--(IBAction) actionSignificant:(id)sender {
+-(IBAction)actionSignificant:(id)sender {
 	if (m_significantSwitch.on) {
 		[self significantOn];
 	} else {
@@ -78,7 +86,7 @@
     }
 }
 
--(IBAction) actionLog:(id)sender {
+-(IBAction)actionLog:(id)sender {
 	LogViewController* pNewController=[[LogViewController alloc] initWithNibName:@"LogViewController" bundle:nil];
 	[self presentViewController:pNewController animated:YES completion:nil];
 }
@@ -94,6 +102,19 @@
         self.m_distanceFilterTextField.text = [NSString stringWithFormat:@"%f", [self getEnteredDistanceFilter]];
     }
     [self.m_distanceFilterTextField resignFirstResponder];
+}
+
+-(IBAction)sendLocation:(id)sender {
+ 	MFMessageComposeViewController *composer = [[MFMessageComposeViewController alloc] init];
+	composer.messageComposeDelegate = self;
+    CLLocation *location = nil;
+    if (m_gpsSwitch.on) {
+        location = [m_gpsDelegate.m_locations lastObject];
+    } else if (m_significantSwitch.on) {
+        location = [m_significantDelegate.m_locations lastObject];
+    }
+    composer.body = [NSString stringWithFormat:@"I am here: http://maps.apple.com/maps?q=%.6f,%.6f. Sent from LocationTest.", location.coordinate.latitude, location.coordinate.longitude];
+	[self presentViewController:composer animated:YES completion:nil];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -129,6 +150,10 @@
         distance = kCLDistanceFilterNone;
     }
     return distance;
+}
+
+- (void)messageComposeViewController:(MFMessageComposeViewController*)controller didFinishWithResult:(MessageComposeResult)result {
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 @end
