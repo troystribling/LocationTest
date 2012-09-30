@@ -13,7 +13,8 @@
 	IBOutlet UITableView * m_tableView;
 }
 
-@property (strong, nonatomic) IBOutlet UITableView * m_tableView;
+@property (strong, nonatomic) IBOutlet UITableView *m_tableView;
+@property (strong, nonatomic) IBOutlet UIToolbar   *m_toolBar;
 
 + (NSString*)locationPath;
 + (void)log:(NSString*)msg;

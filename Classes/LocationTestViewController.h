@@ -34,6 +34,7 @@
 @property (strong, nonatomic) IBOutlet UISwitch     *m_significantSwitch;
 @property (strong, nonatomic) IBOutlet MKMapView    *m_map;
 @property (strong, nonatomic) IBOutlet UIButton     *m_distanceFilterButton;
+@property (strong, nonatomic) IBOutlet UIButton     *m_logButton;
 @property (strong, nonatomic) IBOutlet UITextField  *m_distanceFilterTextField;
 @property (strong, nonatomic) IBOutlet UIButton     *m_sendLocationButton;
 

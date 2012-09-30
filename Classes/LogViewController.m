@@ -12,7 +12,7 @@
 
 @implementation LogViewController
 
-@synthesize m_tableView;
+@synthesize m_tableView, m_toolBar;
 
 #pragma mark -
 #pragma mark View lifecycle
@@ -22,6 +22,12 @@
 }
 
 - (void)viewDidLoad {
+    CGRect screenRect = [[UIScreen mainScreen] bounds];
+    if (screenRect.size.height < 560.0f) {
+        self.view.frame = CGRectMake(0.0f, 20.0f, 320.0f, 460.0f);
+        m_toolBar.frame = CGRectMake(0.0f, 0.0f, 320.0f, 44.0f);
+        m_tableView.frame = CGRectMake(0.0f, 44.0f, 320.0f, 416.0f);
+    }
     [super viewDidLoad];
 }
 

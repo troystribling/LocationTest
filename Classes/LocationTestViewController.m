@@ -19,9 +19,14 @@
 @synthesize m_significantSwitch;
 @synthesize m_gpsSwitch;
 @synthesize m_map;
-@synthesize m_distanceFilterButton, m_distanceFilterTextField, m_sendLocationButton;
+@synthesize m_distanceFilterButton, m_distanceFilterTextField, m_sendLocationButton, m_logButton;
 
 - (void)viewDidLoad {
+    CGRect screenRect = [[UIScreen mainScreen] bounds];
+    if (screenRect.size.height < 560.0f) {
+        m_map.frame = CGRectMake(20.0f, 144.0f, 280.0f, 255.0f);
+        m_logButton.frame = CGRectMake(20.0f, 405.0f, 280.0f, 37.0f);
+    }
     m_map.delegate = self;
 	m_gpsDelegate = [[LocationDelegate alloc] initWithName:@"GPS"];
     m_gpsDelegate.m_map = m_map;
