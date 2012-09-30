@@ -20,9 +20,19 @@
 	return [super init];
 }
 
+- (void)restartService:(CLLocationManager *)manager {
+    if ([m_serviceName isEqualToString:@"GPS"]) {
+        [manager stopUpdatingLocation];
+        [manager startUpdatingLocation];
+    } else if ([m_serviceName isEqualToString:@"SCLS"] || [m_serviceName isEqualToString:@"SCLS RELAUNCH"]) {
+        [manager stopMonitoringSignificantLocationChanges];
+        [manager startMonitoringSignificantLocationChanges];
+    }
+}
+
 - (void)locationManager:(CLLocationManager *)manager didFailWithError:(NSError *)error {
     m_statusLabel.textColor = [UIColor redColor];
-	NSString* logMessage = [NSString stringWithFormat:@"(%@) %@ Failed to get location %@", [self applicationState], m_serviceName, [error localizedDescription]];
+	NSString* logMessage = [NSString stringWithFormat:@"(%@) %@ ERROR: %@", [self applicationState], m_serviceName, [error localizedDescription]];
 	[LogViewController log:logMessage];
 }
 
