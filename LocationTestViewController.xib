@@ -46,7 +46,7 @@
 					<object class="IBUISwitch" id="947053714">
 						<reference key="NSNextResponder" ref="774585933"/>
 						<int key="NSvFlags">292</int>
-						<string key="NSFrame">{{20, 72}, {94, 27}}</string>
+						<string key="NSFrame">{{8, 72}, {94, 27}}</string>
 						<reference key="NSSuperview" ref="774585933"/>
 						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="724802644"/>
@@ -58,7 +58,7 @@
 					<object class="IBUILabel" id="724802644">
 						<reference key="NSNextResponder" ref="774585933"/>
 						<int key="NSvFlags">292</int>
-						<string key="NSFrame">{{138, 75}, {44, 21}}</string>
+						<string key="NSFrame">{{116, 75}, {44, 21}}</string>
 						<reference key="NSSuperview" ref="774585933"/>
 						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="126848018"/>
@@ -78,11 +78,11 @@
 						<nil key="IBUIHighlightedColor"/>
 						<int key="IBUIBaselineAdjustment">1</int>
 						<float key="IBUIMinimumFontSize">10</float>
-						<object class="IBUIFontDescription" key="IBUIFontDescription" id="478941722">
+						<object class="IBUIFontDescription" key="IBUIFontDescription" id="500614594">
 							<int key="type">2</int>
 							<double key="pointSize">17</double>
 						</object>
-						<object class="NSFont" key="IBUIFont" id="689636249">
+						<object class="NSFont" key="IBUIFont" id="629379468">
 							<string key="NSName">Helvetica-Bold</string>
 							<double key="NSSize">17</double>
 							<int key="NSfFlags">16</int>
@@ -91,7 +91,7 @@
 					<object class="IBUISwitch" id="126848018">
 						<reference key="NSNextResponder" ref="774585933"/>
 						<int key="NSvFlags">292</int>
-						<string key="NSFrame">{{20, 107}, {94, 27}}</string>
+						<string key="NSFrame">{{8, 107}, {94, 27}}</string>
 						<reference key="NSSuperview" ref="774585933"/>
 						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="367618595"/>
@@ -103,7 +103,7 @@
 					<object class="IBUILabel" id="367618595">
 						<reference key="NSNextResponder" ref="774585933"/>
 						<int key="NSvFlags">292</int>
-						<string key="NSFrame">{{138, 110}, {53, 21}}</string>
+						<string key="NSFrame">{{116, 110}, {53, 21}}</string>
 						<reference key="NSSuperview" ref="774585933"/>
 						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="841138476"/>
@@ -121,8 +121,8 @@
 						<nil key="IBUIHighlightedColor"/>
 						<int key="IBUIBaselineAdjustment">1</int>
 						<float key="IBUIMinimumFontSize">10</float>
-						<reference key="IBUIFontDescription" ref="478941722"/>
-						<reference key="IBUIFont" ref="689636249"/>
+						<reference key="IBUIFontDescription" ref="500614594"/>
+						<reference key="IBUIFont" ref="629379468"/>
 					</object>
 					<object class="IBMKMapView" id="841138476">
 						<reference key="NSNextResponder" ref="774585933"/>
@@ -141,7 +141,6 @@
 						<string key="NSFrame">{{20, 493}, {280, 37}}</string>
 						<reference key="NSSuperview" ref="774585933"/>
 						<reference key="NSWindow"/>
-						<reference key="NSNextKeyView"/>
 						<bool key="IBUIOpaque">NO</bool>
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 						<int key="IBUIContentHorizontalAlignment">0</int>
@@ -175,7 +174,7 @@
 					<object class="IBUITextField" id="936405990">
 						<reference key="NSNextResponder" ref="774585933"/>
 						<int key="NSvFlags">292</int>
-						<string key="NSFrame">{{32, 34}, {159, 30}}</string>
+						<string key="NSFrame">{{20, 34}, {159, 30}}</string>
 						<reference key="NSSuperview" ref="774585933"/>
 						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="473385065"/>
@@ -212,7 +211,7 @@
 					<object class="IBUIButton" id="473385065">
 						<reference key="NSNextResponder" ref="774585933"/>
 						<int key="NSvFlags">292</int>
-						<string key="NSFrame">{{206, 34}, {76, 31}}</string>
+						<string key="NSFrame">{{224, 34}, {76, 31}}</string>
 						<reference key="NSSuperview" ref="774585933"/>
 						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="947053714"/>
@@ -236,10 +235,10 @@
 							<int key="NSfFlags">16</int>
 						</object>
 					</object>
-					<object class="IBUILabel" id="414241897">
+					<object class="IBUILabel" id="521976345">
 						<reference key="NSNextResponder" ref="774585933"/>
 						<int key="NSvFlags">292</int>
-						<string key="NSFrame">{{35, 5}, {149, 21}}</string>
+						<string key="NSFrame">{{23, 5}, {149, 21}}</string>
 						<reference key="NSSuperview" ref="774585933"/>
 						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="936405990"/>
@@ -259,15 +258,15 @@
 						</object>
 						<nil key="IBUIHighlightedColor"/>
 						<int key="IBUIBaselineAdjustment">0</int>
-						<reference key="IBUIFontDescription" ref="478941722"/>
-						<reference key="IBUIFont" ref="689636249"/>
+						<reference key="IBUIFontDescription" ref="500614594"/>
+						<reference key="IBUIFont" ref="629379468"/>
 						<bool key="IBUIAdjustsFontSizeToFit">NO</bool>
 					</object>
 				</object>
 				<string key="NSFrame">{{0, 20}, {320, 548}}</string>
 				<reference key="NSSuperview"/>
 				<reference key="NSWindow"/>
-				<reference key="NSNextKeyView" ref="414241897"/>
+				<reference key="NSNextKeyView" ref="521976345"/>
 				<reference key="IBUIBackgroundColor" ref="125076331"/>
 				<bool key="IBUIClearsContextBeforeDrawing">NO</bool>
 				<object class="IBUISimulatedStatusBarMetrics" key="IBUISimulatedStatusBarMetrics">
@@ -413,7 +412,7 @@
 							<reference ref="841138476"/>
 							<reference ref="442299493"/>
 							<reference ref="936405990"/>
-							<reference ref="414241897"/>
+							<reference ref="521976345"/>
 							<reference ref="473385065"/>
 							<reference ref="947053714"/>
 							<reference ref="724802644"/>
@@ -468,7 +467,7 @@
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">35</int>
-						<reference key="object" ref="414241897"/>
+						<reference key="object" ref="521976345"/>
 						<reference key="parent" ref="774585933"/>
 					</object>
 				</object>

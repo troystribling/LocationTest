@@ -34,6 +34,8 @@
 
 - (void) significantOn {
 	[LogViewController log:@"SCLS TRACKING ON"];
+    [m_significantDelegate.m_locations removeAllObjects];
+    [m_map removeAnnotations:m_map.annotations];
 	m_significantManager = [[CLLocationManager alloc] init];
 	m_significantManager.delegate = m_significantDelegate;
 	[m_significantManager startMonitoringSignificantLocationChanges];
@@ -41,13 +43,13 @@
 
 - (void) significantOff {
 	[LogViewController log:@"SCLS TRACKING OFF"];
-    [m_map removeAnnotations:m_map.annotations];
-    [m_significantDelegate.m_locations removeAllObjects];
 	[m_significantManager stopMonitoringSignificantLocationChanges];
 }
 
 - (void) gpsOn {
 	[LogViewController log:@"GPS TRACKING ON"];
+    [m_map removeAnnotations:m_map.annotations];
+    [m_gpsDelegate.m_locations removeAllObjects];
 	m_gpsManager = [[CLLocationManager alloc] init];
 	m_gpsManager.delegate = m_gpsDelegate;
     m_gpsManager.distanceFilter = [self getEnteredDistanceFilter];
@@ -57,8 +59,6 @@
 
 - (void) gpsOff {
 	[LogViewController log:@"GPS TRACKING OFF"];
-    [m_map removeAnnotations:m_map.annotations];
-    [m_gpsDelegate.m_locations removeAllObjects];
 	[m_gpsManager stopUpdatingLocation];
 }
 
@@ -124,7 +124,11 @@
     NSNumberFormatter *numberFormatter = [[NSNumberFormatter alloc] init];
     [numberFormatter setNumberStyle:NSNumberFormatterDecimalStyle];
     NSNumber *distanceFiler = [numberFormatter numberFromString:self.m_distanceFilterTextField.text];
-    return [distanceFiler doubleValue];
+    CLLocationDistance distance = [distanceFiler doubleValue];
+    if (distance < 1.0f) {
+        distance = kCLDistanceFilterNone;
+    }
+    return distance;
 }
 
 @end
