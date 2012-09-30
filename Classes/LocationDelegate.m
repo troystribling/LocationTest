@@ -33,6 +33,7 @@
 - (void)locationManager:(CLLocationManager *)manager didFailWithError:(NSError *)error {
     m_statusLabel.textColor = [UIColor redColor];
 	NSString* logMessage = [NSString stringWithFormat:@"(%@) %@ ERROR: %@", [self applicationState], m_serviceName, [error localizedDescription]];
+    [self restartService:manager];
 	[LogViewController log:logMessage];
 }
 
