@@ -21,6 +21,7 @@
 }
 
 - (void)restartService:(CLLocationManager *)manager {
+    [LogViewController log:@"RESTARTING LOCATION SERVICES"];
     if ([m_serviceName isEqualToString:@"GPS"]) {
         [manager stopUpdatingLocation];
         [manager startUpdatingLocation];

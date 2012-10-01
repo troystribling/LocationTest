@@ -21,6 +21,15 @@
 @synthesize m_map;
 @synthesize m_distanceFilterButton, m_distanceFilterTextField, m_sendLocationButton, m_logButton;
 
+- (void)ping {
+    double delayInSeconds = 120.0;
+    dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, delayInSeconds * NSEC_PER_SEC);
+    dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
+        [LogViewController log:@"PING"];
+        [self ping];
+    });
+}
+
 - (void)viewDidLoad {
     CGRect screenRect = [[UIScreen mainScreen] bounds];
     if (screenRect.size.height < 560.0f) {
@@ -34,6 +43,7 @@
 	m_significantDelegate = [[LocationDelegate alloc] initWithName:@"SCLS"];
     m_significantDelegate.m_map = m_map;
     m_significantDelegate.m_pinColor = MKPinAnnotationColorPurple;
+    [self ping];
     [super viewDidLoad];
 }
 
