@@ -19,6 +19,7 @@
 
 - (id)initWithName:(NSString*)serviceName;
 + (NSString*)applicationState;
+- (NSDate*)lastUpdate;
 
 @end
 

@@ -20,6 +20,15 @@
 	return [super init];
 }
 
+- (NSDate*)lastUpdate {
+    NSDate* lastUpdate = [NSDate date];
+    if ([m_locations count] > 0) {
+        CLLocation* lastLocation = [m_locations lastObject];
+        lastUpdate = lastLocation.timestamp;
+    }
+    return lastUpdate;
+}
+
 + (NSString*)applicationState {
     return ([UIApplication sharedApplication].applicationState == UIApplicationStateBackground) ? @"BG" : @"FG";
 }
@@ -32,7 +41,7 @@
 
 - (void)locationManager:(CLLocationManager *)manager didUpdateToLocation:(CLLocation *)location fromLocation:(CLLocation *)oldLocation {
     m_statusLabel.textColor = [UIColor whiteColor];
-
+    
     NSNumber *distance = [NSNumber numberWithInt:0];
     if ([m_locations count] > 0) {
         distance = [NSNumber numberWithDouble:[location getDistanceFrom:[m_locations lastObject]]];
