@@ -25,7 +25,7 @@
     double delayInSeconds = 120.0;
     dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, delayInSeconds * NSEC_PER_SEC);
     dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
-        [LogViewController log:@"PING"];
+        [LogViewController log:[NSString stringWithFormat:@"(%@) PING", [LocationDelegate applicationState]]];
         [self ping];
     });
 }

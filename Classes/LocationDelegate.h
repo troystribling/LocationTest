@@ -18,6 +18,7 @@
 @property (nonatomic, unsafe_unretained) MKPinAnnotationColor   m_pinColor;
 
 - (id)initWithName:(NSString*)serviceName;
++ (NSString*)applicationState;
 
 @end
 

@@ -20,6 +20,10 @@
 	return [super init];
 }
 
++ (NSString*)applicationState {
+    return ([UIApplication sharedApplication].applicationState == UIApplicationStateBackground) ? @"BG" : @"FG";
+}
+
 - (void)restartService:(CLLocationManager *)manager {
     [LogViewController log:@"RESTARTING LOCATION SERVICES"];
     if ([m_serviceName isEqualToString:@"GPS"]) {
@@ -33,7 +37,7 @@
 
 - (void)locationManager:(CLLocationManager *)manager didFailWithError:(NSError *)error {
     m_statusLabel.textColor = [UIColor redColor];
-	NSString* logMessage = [NSString stringWithFormat:@"(%@) %@ ERROR: %@", [self applicationState], m_serviceName, [error localizedDescription]];
+	NSString* logMessage = [NSString stringWithFormat:@"(%@) %@ ERROR: %@", [self.class applicationState], m_serviceName, [error localizedDescription]];
     [self restartService:manager];
 	[LogViewController log:logMessage];
 }
@@ -47,7 +51,7 @@
     }
     [m_locations addObject:location];
     
-    NSString* logMessage = [NSString stringWithFormat:@"(%@) %@ Location: %.6f %.6f",  [self applicationState], m_serviceName,
+    NSString* logMessage = [NSString stringWithFormat:@"(%@) %@ Location: %.6f %.6f",  [self.class applicationState], m_serviceName,
                             location.coordinate.latitude, location.coordinate.longitude];
     [LogViewController log:logMessage];
     logMessage = [NSString stringWithFormat:@"%@ Distance: %d m, Speed: %.1f m/s, Alt: %.0f m", m_serviceName, [distance integerValue], location.speed, location.altitude];
@@ -55,7 +59,7 @@
     if (m_map) {
         NSDateFormatter * dateFormatter = [[NSDateFormatter alloc] init];
         [dateFormatter setTimeStyle:NSDateFormatterMediumStyle];
-        NSString *annotationTitle = [NSString stringWithFormat:@"(%d:%@:%@) %@", [m_locations count], [self applicationState], m_serviceName, [dateFormatter stringFromDate:[NSDate date]]];
+        NSString *annotationTitle = [NSString stringWithFormat:@"(%d:%@:%@) %@", [m_locations count], [self.class applicationState], m_serviceName, [dateFormatter stringFromDate:[NSDate date]]];
         NSString *annotationSubtitle = [NSString stringWithFormat:@"Distance: %d m, Speed: %.1f m/s\n Alt: %.0f m", [distance integerValue], location.speed, location.altitude];
         LocationAnnotation *annotation = [[LocationAnnotation alloc] initWithCoordinates:location.coordinate
                                                                                    title:annotationTitle
@@ -69,10 +73,6 @@
             [m_map setCenterCoordinate:location.coordinate];
         }
     }
-}
-
-- (NSString*)applicationState {
-    return ([UIApplication sharedApplication].applicationState == UIApplicationStateBackground) ? @"BG" : @"FG";
 }
 
 @end
