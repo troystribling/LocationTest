@@ -24,21 +24,9 @@
     return ([UIApplication sharedApplication].applicationState == UIApplicationStateBackground) ? @"BG" : @"FG";
 }
 
-- (void)restartService:(CLLocationManager *)manager {
-    [LogViewController log:@"RESTARTING LOCATION SERVICES"];
-    if ([m_serviceName isEqualToString:@"GPS"]) {
-        [manager stopUpdatingLocation];
-        [manager startUpdatingLocation];
-    } else if ([m_serviceName isEqualToString:@"SCLS"] || [m_serviceName isEqualToString:@"SCLS RELAUNCH"]) {
-        [manager stopMonitoringSignificantLocationChanges];
-        [manager startMonitoringSignificantLocationChanges];
-    }
-}
-
 - (void)locationManager:(CLLocationManager *)manager didFailWithError:(NSError *)error {
     m_statusLabel.textColor = [UIColor redColor];
 	NSString* logMessage = [NSString stringWithFormat:@"(%@) %@ ERROR: %@", [self.class applicationState], m_serviceName, [error localizedDescription]];
-    [self restartService:manager];
 	[LogViewController log:logMessage];
 }
 

@@ -21,11 +21,24 @@
 @synthesize m_map;
 @synthesize m_distanceFilterButton, m_distanceFilterTextField, m_sendLocationButton, m_logButton;
 
+- (void)restartService {
+    [LogViewController log:@"RESTARTING LOCATION SERVICES"];
+    if (m_gpsSwitch.on) {
+        [m_gpsManager stopUpdatingLocation];
+        [m_gpsManager startUpdatingLocation];
+    }
+    if (m_significantSwitch.on) {
+        [m_significantManager stopMonitoringSignificantLocationChanges];
+        [m_significantManager startMonitoringSignificantLocationChanges];
+    }
+}
+
 - (void)ping {
-    double delayInSeconds = 120.0;
+    double delayInSeconds = 180.0;
     dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, delayInSeconds * NSEC_PER_SEC);
     dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
         [LogViewController log:[NSString stringWithFormat:@"(%@) PING", [LocationDelegate applicationState]]];
+        [self restartService];
         [self ping];
     });
 }
