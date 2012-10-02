@@ -17,7 +17,7 @@
 
 @synthesize m_gpsLabel;
 @synthesize m_significantLabel;
-@synthesize m_significantSwitch;
+@synthesize m_significantSwitch, m_trackSwitch;
 @synthesize m_gpsSwitch;
 @synthesize m_map;
 @synthesize m_distanceFilterButton, m_distanceFilterTextField, m_sendLocationButton, m_logButton;
@@ -70,7 +70,7 @@
 
 - (void)significantOn {
     m_sendLocationButton.enabled = YES;
-	[LogViewController log:@"SCLS TRACKING ON"];
+	[LogViewController log:@"SCLS ON"];
     [m_significantDelegate.m_locations removeAllObjects];
     [m_map removeAnnotations:m_map.annotations];
 	m_significantManager = [[CLLocationManager alloc] init];
@@ -82,19 +82,19 @@
     if (!m_gpsSwitch.on) {
         m_sendLocationButton.enabled = NO;
     }
-	[LogViewController log:@"SCLS TRACKING OFF"];
+	[LogViewController log:@"SCLS OFF"];
 	[m_significantManager stopMonitoringSignificantLocationChanges];
 }
 
 - (void)gpsOn {
     m_sendLocationButton.enabled = YES;
-	[LogViewController log:@"GPS TRACKING ON"];
+	[LogViewController log:@"GPS ON"];
     [m_map removeAnnotations:m_map.annotations];
     [m_gpsDelegate.m_locations removeAllObjects];
 	m_gpsManager = [[CLLocationManager alloc] init];
 	m_gpsManager.delegate = m_gpsDelegate;
     m_gpsManager.distanceFilter = [self getEnteredDistanceFilter];
-    self.m_distanceFilterTextField.text = [NSString stringWithFormat:@"%f", m_gpsManager.distanceFilter];
+    m_distanceFilterTextField.text = [NSString stringWithFormat:@"%f", m_gpsManager.distanceFilter];
 	[m_gpsManager startUpdatingLocation];
 }
 
@@ -102,11 +102,67 @@
     if (!m_significantSwitch.on) {
         m_sendLocationButton.enabled = NO;
     }
-	[LogViewController log:@"GPS TRACKING OFF"];
+	[LogViewController log:@"GPS OFF"];
 	[m_gpsManager stopUpdatingLocation];
 }
 
+- (void)trackGPSOn {
+	[LogViewController log:@"TRACKING GPS ON"];
+    m_sendLocationButton.enabled = YES;
+	m_gpsManager = [[CLLocationManager alloc] init];
+	m_gpsManager.delegate = m_gpsDelegate;
+    m_gpsManager.distanceFilter = [self getEnteredDistanceFilter];
+    m_distanceFilterTextField.text = [NSString stringWithFormat:@"%f", m_gpsManager.distanceFilter];
+	[m_gpsManager startUpdatingLocation];
+}
+
+- (void)trackGPSOff {
+    m_sendLocationButton.enabled = NO;
+	[LogViewController log:@"TRACKING GPS OFF"];
+	[m_gpsManager stopUpdatingLocation];
+}
+
+- (void)trackSCLSOn {
+	[LogViewController log:@"TRACKING SCLS ON"];
+	m_significantManager = [[CLLocationManager alloc] init];
+	m_significantManager.delegate = m_significantDelegate;
+	[m_significantManager startMonitoringSignificantLocationChanges];
+}
+
+- (void)trackSCLSOff {
+	[LogViewController log:@"TRACK SCLS OFF"];
+	[m_significantManager stopMonitoringSignificantLocationChanges];
+}
+
+-(void)setSwitchesEnabled {
+	if (m_gpsSwitch.on || m_significantSwitch.on) {
+        m_trackSwitch.enabled = NO;
+    } else {
+        m_trackSwitch.enabled = YES;
+    }
+    if (m_trackSwitch.on) {
+        m_gpsSwitch.enabled = NO;
+        m_significantSwitch.enabled = NO;
+    } else {
+        m_gpsSwitch.enabled = YES;
+        m_significantSwitch.enabled = YES;
+    }
+}
+
+- (void)trackOn {
+	[LogViewController log:@"TRACKING ON"];
+    [m_map removeAnnotations:m_map.annotations];
+    [m_gpsDelegate.m_locations removeAllObjects];
+    [m_significantDelegate.m_locations removeAllObjects];
+    [self trackGPSOn];
+}
+
+- (void)trackOff {
+    [self trackGPSOff];
+}
+
 -(IBAction)actionGps:(id)sender {
+    [self setSwitchesEnabled];
 	if (m_gpsSwitch.on) {
 		[self gpsOn];
 	} else {
@@ -115,10 +171,20 @@
 }
 
 -(IBAction)actionSignificant:(id)sender {
+    [self setSwitchesEnabled];
 	if (m_significantSwitch.on) {
 		[self significantOn];
 	} else {
 		[self significantOff];
+    }
+}
+
+-(IBAction)actionTrack:(id)sender {
+    [self setSwitchesEnabled];
+	if (m_trackSwitch.on) {
+		[self trackOn];
+	} else {
+		[self trackOff];
     }
 }
 
@@ -131,13 +197,13 @@
     if (m_gpsManager) {
         [m_gpsManager stopUpdatingLocation];
         m_gpsManager.distanceFilter = [self getEnteredDistanceFilter];
-        self.m_distanceFilterTextField.text = [NSString stringWithFormat:@"%f", m_gpsManager.distanceFilter];
+        m_distanceFilterTextField.text = [NSString stringWithFormat:@"%f", m_gpsManager.distanceFilter];
         [m_gpsManager startUpdatingLocation];
         [m_map removeAnnotations:m_map.annotations];
     } else {
-        self.m_distanceFilterTextField.text = [NSString stringWithFormat:@"%f", [self getEnteredDistanceFilter]];
+        m_distanceFilterTextField.text = [NSString stringWithFormat:@"%f", [self getEnteredDistanceFilter]];
     }
-    [self.m_distanceFilterTextField resignFirstResponder];
+    [m_distanceFilterTextField resignFirstResponder];
 }
 
 -(IBAction)sendLocation:(id)sender {
@@ -162,7 +228,7 @@
     if ([annotation isKindOfClass:[LocationAnnotation class]] == NO) {
         return result;
     }
-    if ([mapView isEqual:self.m_map] == NO) {
+    if ([mapView isEqual:m_map] == NO) {
         return result;
     }
     LocationAnnotation *senderAnnotation = (LocationAnnotation*)annotation;
@@ -180,7 +246,7 @@
 - (CLLocationDistance)getEnteredDistanceFilter {
     NSNumberFormatter *numberFormatter = [[NSNumberFormatter alloc] init];
     [numberFormatter setNumberStyle:NSNumberFormatterDecimalStyle];
-    NSNumber *distanceFiler = [numberFormatter numberFromString:self.m_distanceFilterTextField.text];
+    NSNumber *distanceFiler = [numberFormatter numberFromString:m_distanceFilterTextField.text];
     CLLocationDistance distance = [distanceFiler doubleValue];
     if (distance < 1.0f) {
         distance = kCLDistanceFilterNone;

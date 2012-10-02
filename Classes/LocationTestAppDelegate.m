@@ -28,8 +28,8 @@
         [m_locManager startMonitoringSignificantLocationChanges];
 	} else {
         [LogViewController log:@"didFinishLaunching"];
-        self.window.rootViewController = self.viewController;
-        [self.window makeKeyAndVisible];
+        window.rootViewController = viewController;
+        [window makeKeyAndVisible];
     }
 	return YES;
 }
@@ -37,9 +37,15 @@
 - (void)applicationWillResignActive:(UIApplication *)application {
 	[LogViewController log:@"applicationWillResignActive"];
 	NSUserDefaults * userDefaults = [NSUserDefaults standardUserDefaults];
-	[userDefaults setBool:viewController.m_significantSwitch.on forKey:@"significant"];
+	[userDefaults setBool:viewController.m_significantSwitch.on forKey:@"SCLS"];
+	[userDefaults setBool:viewController.m_gpsSwitch.on forKey:@"GPS"];
+	[userDefaults setBool:viewController.m_trackSwitch.on forKey:@"Track"];
 	[userDefaults setObject:viewController.m_distanceFilterTextField.text forKey:@"distanceFilter"];
 	[userDefaults synchronize];
+    if (viewController.m_trackSwitch.on) {
+        [viewController trackGPSOff];
+        [viewController trackSCLSOn];
+    }
 }                
 
 - (void)applicationDidEnterBackground:(UIApplication *)application {
@@ -53,10 +59,17 @@
 - (void)applicationDidBecomeActive:(UIApplication *)application {
 	[LogViewController log:@"applicationDidBecomeActive"];
     NSUserDefaults * userDefaults = [NSUserDefaults standardUserDefaults];
-    viewController.m_significantSwitch.on = [userDefaults boolForKey:@"significant"];
+    viewController.m_significantSwitch.on = [userDefaults boolForKey:@"SCLS"];
+    viewController.m_gpsSwitch.on = [userDefaults boolForKey:@"GPS"];
+    viewController.m_trackSwitch.on = [userDefaults boolForKey:@"Track"];
     NSString* distanceFilter = [userDefaults objectForKey:@"distanceFilter"];
     if (distanceFilter) {
         viewController.m_distanceFilterTextField.text = distanceFilter;
+    }
+    [viewController setSwitchesEnabled];
+    if (viewController.m_trackSwitch.on) {
+        [viewController trackGPSOn];
+        [viewController trackSCLSOff];
     }
 }
 

@@ -24,17 +24,24 @@
 
 -(IBAction)actionGps:(id)sender;
 -(IBAction)actionSignificant:(id)sender;
+-(IBAction)actionTrack:(id)sender;
 -(IBAction)actionLog:(id)sender;
 -(IBAction)setDistanceFilter:(id)sender;
 -(IBAction)sendLocation:(id)sender;
 -(CLLocationDistance)getEnteredDistanceFilter;
 -(void)restartSCLSManager;
 -(void)restartGPSSManager;
+-(void)trackGPSOn;
+-(void)trackGPSOff;
+-(void)trackSCLSOn;
+-(void)trackSCLSOff;
+-(void)setSwitchesEnabled;
 
 @property (strong, nonatomic) IBOutlet UILabel      *m_gpsLabel;
 @property (strong, nonatomic) IBOutlet UILabel      *m_significantLabel;
 @property (strong, nonatomic) IBOutlet UISwitch     *m_gpsSwitch;
 @property (strong, nonatomic) IBOutlet UISwitch     *m_significantSwitch;
+@property (strong, nonatomic) IBOutlet UISwitch     *m_trackSwitch;
 @property (strong, nonatomic) IBOutlet MKMapView    *m_map;
 @property (strong, nonatomic) IBOutlet UIButton     *m_distanceFilterButton;
 @property (strong, nonatomic) IBOutlet UIButton     *m_logButton;
