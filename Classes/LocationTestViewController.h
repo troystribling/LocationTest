@@ -28,7 +28,8 @@
 -(IBAction)setDistanceFilter:(id)sender;
 -(IBAction)sendLocation:(id)sender;
 -(CLLocationDistance)getEnteredDistanceFilter;
--(void)restartService;
+-(void)restartSCLSManager;
+-(void)restartGPSSManager;
 
 @property (strong, nonatomic) IBOutlet UILabel      *m_gpsLabel;
 @property (strong, nonatomic) IBOutlet UILabel      *m_significantLabel;

@@ -22,15 +22,19 @@
 @synthesize m_map;
 @synthesize m_distanceFilterButton, m_distanceFilterTextField, m_sendLocationButton, m_logButton;
 
-- (void)restartService {
-    [LogViewController log:@"RESTARTING LOCATION SERVICES"];
-    if (m_gpsSwitch.on) {
-        [m_gpsManager stopUpdatingLocation];
-        [m_gpsManager startUpdatingLocation];
-    }
+-(void)restartSCLSManager {
+    [LogViewController log:@"RESTARTING SCL LOCATION SERVICES"];
     if (m_significantSwitch.on) {
         [m_significantManager stopMonitoringSignificantLocationChanges];
         [m_significantManager startMonitoringSignificantLocationChanges];
+    }
+}
+
+-(void)restartGPSSManager {
+    [LogViewController log:@"RESTARTING GPS LOCATION SERVICES"];
+    if (m_gpsSwitch.on) {
+        [m_gpsManager stopUpdatingLocation];
+        [m_gpsManager startUpdatingLocation];
     }
 }
 
@@ -54,10 +58,12 @@
     m_gpsDelegate.m_map = m_map;
     m_gpsDelegate.m_pinColor = MKPinAnnotationColorGreen;
     m_gpsDelegate.m_statusLabel = m_gpsLabel;
+    m_gpsDelegate.m_viewController = self;
 	m_significantDelegate = [SignificantLocationChangeDelegate createWithName:@"SCLS"];
     m_significantDelegate.m_map = m_map;
     m_significantDelegate.m_pinColor = MKPinAnnotationColorPurple;
     m_significantDelegate.m_statusLabel = m_significantLabel;
+    m_significantDelegate.m_viewController = self;
     [self ping];
     [super viewDidLoad];
 }

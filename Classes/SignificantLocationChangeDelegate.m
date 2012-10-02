@@ -22,7 +22,7 @@
 }
 
 - (void)locationManager:(CLLocationManager*)manager didUpdateToLocation:(CLLocation *)location fromLocation:(CLLocation *)oldLocation {
-    [self.m_viewController restartService];
+    [self.m_viewController restartGPSSManager];
     [self handleLocationManager:manager didUpdateToLocation:location fromLocation:oldLocation];
 }
 
