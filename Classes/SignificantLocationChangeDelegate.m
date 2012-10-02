@@ -9,6 +9,7 @@
 #import "SignificantLocationChangeDelegate.h"
 #import "LogViewController.h"
 #import "LocationAnnotation.h"
+#import "LocationTestViewController.h"
 
 @implementation SignificantLocationChangeDelegate
 
@@ -21,6 +22,7 @@
 }
 
 - (void)locationManager:(CLLocationManager*)manager didUpdateToLocation:(CLLocation *)location fromLocation:(CLLocation *)oldLocation {
+    [self.m_viewController restartService];
     [self handleLocationManager:manager didUpdateToLocation:location fromLocation:oldLocation];
 }
 

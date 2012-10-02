@@ -12,7 +12,7 @@
 
 @implementation LocationDelegate
 
-@synthesize m_locations, m_map, m_serviceName, m_statusLabel, m_pinColor;
+@synthesize m_locations, m_map, m_serviceName, m_statusLabel, m_pinColor, m_viewController;
 
 - (id) initWithName:(NSString *)serviceName {
     self = [super init];

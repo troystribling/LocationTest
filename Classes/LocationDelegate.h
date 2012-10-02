@@ -9,6 +9,8 @@
 #import <Foundation/Foundation.h>
 #import <MapKit/MapKit.h>
 
+@class LocationTestViewController;
+
 @interface  LocationDelegate : NSObject <CLLocationManagerDelegate>  
 
 @property (nonatomic, strong) NSString                          *m_serviceName;
@@ -16,6 +18,7 @@
 @property (weak, nonatomic)   MKMapView                         *m_map;
 @property (nonatomic, strong) UILabel                           *m_statusLabel;
 @property (nonatomic, unsafe_unretained) MKPinAnnotationColor   m_pinColor;
+@property (nonatomic, weak) LocationTestViewController          *m_viewController;
 
 - (id)initWithName:(NSString*)serviceName;
 + (NSString*)applicationState;
