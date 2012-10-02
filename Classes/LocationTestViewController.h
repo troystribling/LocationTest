@@ -12,13 +12,14 @@
 #import <MessageUI/MessageUI.h>
 #import <MessageUI/MFMailComposeViewController.h>
 
-@class LocationDelegate;
+@class GPSLocationDelegate;
+@class SignificantLocationChangeDelegate;
 
 @interface LocationTestViewController : UIViewController <CLLocationManagerDelegate, MKMapViewDelegate, MFMessageComposeViewControllerDelegate> {
-	LocationDelegate    *m_gpsDelegate;
-	LocationDelegate    *m_significantDelegate;
-	CLLocationManager   *m_gpsManager;
-	CLLocationManager   *m_significantManager;
+	GPSLocationDelegate                     *m_gpsDelegate;
+	SignificantLocationChangeDelegate       *m_significantDelegate;
+	CLLocationManager                       *m_gpsManager;
+	CLLocationManager                       *m_significantManager;
 }
 
 -(IBAction)actionGps:(id)sender;

@@ -9,7 +9,7 @@
 #import "LocationTestAppDelegate.h"
 #import "LocationTestViewController.h"
 #import "LogViewController.h"
-#import "LocationDelegate.h"
+#import "SignificantLocationChangeDelegate.h"
 
 @implementation LocationTestAppDelegate
 
@@ -23,7 +23,7 @@
 	if (locationValue) {
 		[LogViewController log:@"didFinishLaunchingWithOptions UIApplicationLaunchOptionsLocationKey"];
         m_locManager = [[CLLocationManager alloc] init];
-        m_locationDelegate = [[LocationDelegate alloc] initWithName:@"SCLS RELAUNCH"];
+        m_locationDelegate = [SignificantLocationChangeDelegate createWithName:@"SCLS RELAUNCH"];
         m_locManager.delegate = m_locationDelegate;
         [m_locManager startMonitoringSignificantLocationChanges];
 	} else {

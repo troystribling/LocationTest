@@ -20,6 +20,8 @@
 - (id)initWithName:(NSString*)serviceName;
 + (NSString*)applicationState;
 - (NSDate*)lastUpdate;
+- (void)handleLocationManager:(CLLocationManager *)manager didFailWithError:(NSError *)error;
+- (void)handleLocationManager:(CLLocationManager *)manager didUpdateToLocation:(CLLocation *)location fromLocation:(CLLocation *)oldLocation;
 
 @end
 

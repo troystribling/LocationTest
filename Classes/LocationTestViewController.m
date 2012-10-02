@@ -9,7 +9,8 @@
 #import "LocationTestViewController.h"
 #import "LogViewController.h"
 #import "LocationTestAppDelegate.h"
-#import "LocationDelegate.h"
+#import "GPSLocationDelegate.h"
+#import "SignificantLocationChangeDelegate.h"
 #import "LocationAnnotation.h"
 
 @implementation LocationTestViewController
@@ -49,12 +50,14 @@
         m_logButton.frame = CGRectMake(20.0f, 405.0f, 280.0f, 37.0f);
     }
     m_map.delegate = self;
-	m_gpsDelegate = [[LocationDelegate alloc] initWithName:@"GPS"];
+	m_gpsDelegate = [GPSLocationDelegate create];
     m_gpsDelegate.m_map = m_map;
     m_gpsDelegate.m_pinColor = MKPinAnnotationColorGreen;
-	m_significantDelegate = [[LocationDelegate alloc] initWithName:@"SCLS"];
+    m_gpsDelegate.m_statusLabel = m_gpsLabel;
+	m_significantDelegate = [SignificantLocationChangeDelegate createWithName:@"SCLS"];
     m_significantDelegate.m_map = m_map;
     m_significantDelegate.m_pinColor = MKPinAnnotationColorPurple;
+    m_significantDelegate.m_statusLabel = m_significantLabel;
     [self ping];
     [super viewDidLoad];
 }

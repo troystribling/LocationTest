@@ -15,9 +15,12 @@
 @synthesize m_locations, m_map, m_serviceName, m_statusLabel, m_pinColor;
 
 - (id) initWithName:(NSString *)serviceName {
-	m_serviceName = serviceName;
-    m_locations = [NSMutableArray array];
-	return [super init];
+    self = [super init];
+    if (self) {
+        m_serviceName = serviceName;
+        m_locations = [NSMutableArray array];
+    }
+	return self;
 }
 
 - (NSDate*)lastUpdate {
@@ -33,18 +36,18 @@
     return ([UIApplication sharedApplication].applicationState == UIApplicationStateBackground) ? @"BG" : @"FG";
 }
 
-- (void)locationManager:(CLLocationManager *)manager didFailWithError:(NSError *)error {
+- (void)handleLocationManager:(CLLocationManager *)manager didFailWithError:(NSError *)error {
     m_statusLabel.textColor = [UIColor redColor];
 	NSString* logMessage = [NSString stringWithFormat:@"(%@) %@ ERROR: %@", [self.class applicationState], m_serviceName, [error localizedDescription]];
 	[LogViewController log:logMessage];
 }
 
-- (void)locationManager:(CLLocationManager *)manager didUpdateToLocation:(CLLocation *)location fromLocation:(CLLocation *)oldLocation {
+- (void)handleLocationManager:(CLLocationManager *)manager didUpdateToLocation:(CLLocation *)location fromLocation:(CLLocation *)oldLocation {
     m_statusLabel.textColor = [UIColor whiteColor];
     
     NSNumber *distance = [NSNumber numberWithInt:0];
     if ([m_locations count] > 0) {
-        distance = [NSNumber numberWithDouble:[location getDistanceFrom:[m_locations lastObject]]];
+        distance = [NSNumber numberWithDouble:[location distanceFromLocation:[m_locations lastObject]]];
     }
     [m_locations addObject:location];
     
