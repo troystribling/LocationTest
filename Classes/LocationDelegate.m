@@ -51,10 +51,11 @@
     }
     [m_locations addObject:location];
     
-    NSString* logMessage = [NSString stringWithFormat:@"(%@) %@ Location: %.6f %.6f",  [self.class applicationState], m_serviceName,
-                            location.coordinate.latitude, location.coordinate.longitude];
+    NSString *logMessage = [NSString stringWithFormat:@"%@ Horiz Acc: %.1f m, Vert Acc: %.1f m", m_serviceName, location.horizontalAccuracy, location.verticalAccuracy];
     [LogViewController log:logMessage];
     logMessage = [NSString stringWithFormat:@"%@ Distance: %d m, Speed: %.1f m/s, Alt: %.0f m", m_serviceName, [distance integerValue], location.speed, location.altitude];
+    [LogViewController log:logMessage];
+    logMessage = [NSString stringWithFormat:@"(%@) %@ Location: %.6f %.6f",  [self.class applicationState], m_serviceName, location.coordinate.latitude, location.coordinate.longitude];
     [LogViewController log:logMessage];
     if (m_map) {
         NSDateFormatter * dateFormatter = [[NSDateFormatter alloc] init];
