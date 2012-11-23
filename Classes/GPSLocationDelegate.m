@@ -23,4 +23,12 @@
     [self handleLocationManager:manager didUpdateToLocation:location fromLocation:oldLocation];
 }
 
+- (void)locationManagerDidPauseLocationUpdates:(CLLocationManager*)manager {
+	[LogViewController log:@"GPS PAUSED: locationManagerDidPauseLocationUpdates"];
+}
+
+- (void)locationManagerDidResumeLocationUpdates:(CLLocationManager*)manager {
+	[LogViewController log:@"GPS RESUMED: locationManagerDidResumeLocationUpdates"];
+}
+
 @end

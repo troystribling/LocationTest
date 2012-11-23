@@ -28,4 +28,12 @@
     [self handleLocationManager:manager didUpdateToLocation:location fromLocation:oldLocation];
 }
 
+- (void)locationManagerDidPauseLocationUpdates:(CLLocationManager*)manager {
+	[LogViewController log:@"SCLS PAUSED: locationManagerDidPauseLocationUpdates"];
+}
+
+- (void)locationManagerDidResumeLocationUpdates:(CLLocationManager*)manager {
+	[LogViewController log:@"SCLS RESUMED: locationManagerDidResumeLocationUpdates"];
+}
+
 @end
